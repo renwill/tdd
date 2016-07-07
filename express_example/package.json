@@ -1,0 +1,16 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "describe-it": "^1.7.0",
+    "node-mocks-http": "^1.5.2",
+    "rewire": "^2.5.1",
+    "should": "^9.0.2",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "ag-grid": "^4.2.7"
+  }
+}
