@@ -1,0 +1,22 @@
+{
+  "name": "application-name",
+  "version": "1.0.0",
+  "description": "Input the description here.",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "your_name",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "rewire": "2.5.1",
+    "should": "9.0.2",
+    "sinon": "1.17.4",
+    "sinon-chai": "2.8.0"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+	"test" : "nodemon --ext js --exec istanbul mocha || true”
+  }
+}
