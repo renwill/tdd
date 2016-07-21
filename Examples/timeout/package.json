@@ -1,0 +1,13 @@
+{
+  "name": "timeout_demo",
+  "version": "1.0.0",
+  "description": "timeout demo",
+  "main": "foo.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
