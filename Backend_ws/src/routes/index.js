@@ -1,11 +1,6 @@
-/**
- * Created by MAOLY on 4/19/2016.
- */
 'use strict';
 var fs = require('fs');
 var path = require('path');
-var express = require('express');
-var router = express.Router();
 
 module.exports = function(app) {
     // Load all other routes

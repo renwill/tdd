@@ -2,9 +2,9 @@
   "loggerConfig": {
     "logDisabled": false,
     "logLevel": "debug",
-    "logPath": "./logs/njdomxxxx-app.log",
+    "logPath": "./logs/program.log",
     "accessLogDisabled": false,
     "accessLogLevel": "info",
-    "accessLogPath": "./logs/njdomxxxx-access.log"
+    "accessLogPath": "./logs/access.log"
   }
 }

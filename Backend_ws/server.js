@@ -7,9 +7,17 @@ global.componentId = 'njdomxxxxxxx';
 var path = require('path');
 var fs = require('fs');
 var nconf = require('nconf');
+var winston = require('winston');
+var express = require('express');
+var app = express();
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
 
 var logDir = path.join(__dirname, 'logs');
 var configDir = path.join(__dirname, 'config');
+var appLogger;
+var appConfigPath;
+var defaultConfigPath;
 
 if (!fs.existsSync(logDir)){
     fs.mkdirSync(logDir);
@@ -17,7 +25,7 @@ if (!fs.existsSync(logDir)){
 
 /* load application config */
 try {
-    var appConfigPath = path.join(configDir, 'config.json');
+    appConfigPath = path.join(configDir, 'config.json');
     if (!fs.existsSync(appConfigPath)) {
         console.log(new Date().toISOString(), 'Missing application config! Expected config file at path: ', appConfigPath);
     } else {
@@ -32,7 +40,7 @@ try {
 
 /* load default config */
 try {
-    var defaultConfigPath = path.join(configDir, 'default-config.json');
+    defaultConfigPath = path.join(configDir, 'default-config.json');
     if (!fs.existsSync(defaultConfigPath)) {
         console.log(new Date().toISOString(), 'Missing default config! Expected config file at path: ', defaultConfigPath);
     } else {
@@ -48,22 +56,12 @@ try {
 /***************************************************
  * Winston Setup
  ***************************************************/
-var winston = require('winston');
 // Add appLogger to global object so it can be accessed by all modules
 global.appLogger = require(path.join(__dirname, 'src', 'utils', 'appLogger'));
-var appLogger = global.appLogger;
+appLogger = global.appLogger;
 appLogger.initApp(nconf.get('loggerConfig'));
 
 
-/***************************************************
- * Express Setup
- ***************************************************/
-var express = require('express');
-var app = express();
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-
-// set the static files location
 // app.use(express.static(__dirname + '/public'));
 
 // HTTP Request Logging
@@ -77,11 +75,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.locals.getCtrlPath = function(pCtrlName) {
     return path.join(__dirname, 'src', 'controllers', pCtrlName);
 };
-var routes = require('./src/routes')(app);
+require('./src/routes')(app);
 
-app.listen(8080, function(){
-    appLogger.info('Express server listening on port 8080');
-});
 
 /***************************************************
  * Exception Handling Setup
@@ -114,4 +109,8 @@ process.on('unhandledRejection', function(reason, p) {
 process.on('SIGTERM', function() {
     appLogger.info('Shutting down');
     process.exit(0);
+});
+
+app.listen(8080, function(){
+    appLogger.info('Express server listening on port 8080');
 });
