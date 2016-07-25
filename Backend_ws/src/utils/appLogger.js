@@ -1,5 +1,4 @@
 'use strict';
-//var util = require('util');
 var winston = require('winston');
 var logger;
 var accessLogger;

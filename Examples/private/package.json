@@ -1,0 +1,15 @@
+{
+  "name": "rewire-example",
+  "version": "0.0.1",
+  "description": "Example codes on how to test private function",
+  "devDependencies": {
+    "rewire": "^2.5.1",
+    "mocha": "2.2.5",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0",
+    "chai": "3.3.0"
+  },
+  "scripts": {
+    "test" : "nodemon --ext js --exec mocha || true "
+  }
+}

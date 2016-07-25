@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test" : "nodemon --ext js --exec istanbul mocha || true"
+    "test": "mocha",
+    "coverage" : "nodemon --ext js --exec istanbul cover C:\\Users\\maoly\\AppData\\Roaming\\npm\\node_modules\\mocha\\bin\\_mocha"
   }
 }
