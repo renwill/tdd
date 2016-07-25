@@ -2,9 +2,6 @@
   "name": "application-name",
   "version": "1.0.0",
   "description": "Input the description here.",
-  "scripts": {
-    "test": "npm test"
-  },
   "author": "your_name",
   "devDependencies": {
     "chai": "3.5.0",
@@ -14,9 +11,18 @@
     "sinon-chai": "2.8.0"
   },
   "dependencies": {
+    "async": "1.5.2",
+    "express": "4.14.0",
+    "mongoose": "4.5.6",
+    "winston": "2.2.0",
+    "nconf": "0.8.4",
+    "body-parser": "1.15.2",
+    "lodash": "4.14.0",
+    "morgan": "1.7.0",
+    "moment": "2.14.1"
   },
   "scripts": {
     "start": "nodemon server.js",
-	"test" : "nodemon --ext js --exec istanbul mocha || true”
+    "test" : "nodemon --ext js --exec istanbul mocha || true"
   }
 }
