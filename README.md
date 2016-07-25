@@ -65,20 +65,48 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 # Development
 
 ### 1. Name your application
-* Fill in application/developer information in package.json
-*  Edit Run/Debug config
+* Fill in application/developer information in *package.json*
 
-#### Coding style:
-### Native JavsScript
+----
+# Coding style:
+### A. Native JavsScript
+- Syntax and grammar
+  - Use semicolons at the end of statement, assignment
+      ```
+      var a = 1; // This is an assignment, has semicolon ;
+      var fn = function(a) {
+          ...
+      }; // This is also an assignment, has semicolon ;
+
+      function foo(a) {
+          ...
+      } //This is not an assignment. No semicolon ;
+      ```
+  - Use === and !== over == and !=.
+  - Avoid eval().
+  - Avoid with.
+
+  - Whitespace
+    - Every **comma (,)** should be followed by a space or a **line break**.
+    - Each **semicolon (;)** at the end of a statement should be followed with a **line break**.
+    - Each **semicolon (;)** in the control part of a for statement should be followed with a **space**.
+    - No space between nameOfFunction and **left parenthesis (**. One space between **right parenthesis )** and the **left curly brace {**. Example:
+      ```
+      function nameOfFunction(a, b) {
+        // nameOfFunction[no space here](
+        // a, b)[one space here]{
+      }
+      ```
+
 - Naming
-  - Use camelCase for (most) identifier names (variables and functions), (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
-  - Constructor functions that must be used with the new prefix should start with a capital letter.
-  - Global variables in browsers should be in all CAPITAL letters.
+  - **Identifier** (variables and functions): **camelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
+  - **Constructor** (functions that must be used with the new prefix): start with a **Capital** letter.
+  - **Global** variables (in browsers): in **CAPITAL** letters.
 
 - Declarations
   - Variable
     - All variables should be declared before used.
-    - It is preferred that each variable declarative statement and comment. They should be listed in alphabetical order if possible.
+    - It is preferred that each variable has declarative statement (and comment). They should be listed in alphabetical order if possible.
 
         ```
         var currentEntry; // currently selected table entry
@@ -88,21 +116,6 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
   - Function
     - All functions should be declared before they are used.
 
-- Expression
-  - Use === and !== over == and !=.
-  - Avoid eval().
-  - Avoid with.
 
-- Whitespace
-  - Every **comma (,)** should be followed by a space or a **line break**.
-  - Each **semicolon (;)** at the end of a statement should be followed with a **line break**.
-  - Each **semicolon (;)** in the control part of a for statement should be followed with a **space**.
-  - No space between nameOfFunction and **left parenthesis (**. One space between **right parenthesis )** and the **left curly brace {**. Example:
-    ```
-    function nameOfFunction(a, b) {
-        // nameOfFunction[no space here](
-        // a, b)[one space here]{
-    }
-    ```
-
-- Node.JS
+- B. Node.JS
+  - 4 space for indentation

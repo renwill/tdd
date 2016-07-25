@@ -19,10 +19,6 @@ var appLogger;
 var appConfigPath;
 var defaultConfigPath;
 
-if (!fs.existsSync(logDir)){
-    fs.mkdirSync(logDir);
-}
-
 /* load application config */
 try {
     appConfigPath = path.join(configDir, 'config.json');
