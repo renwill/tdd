@@ -5,10 +5,13 @@
   "author": "your_name",
   "devDependencies": {
     "chai": "3.5.0",
+    "mocha": "2.5.3",
+    "node-mocks-http": "^1.5.2",
     "rewire": "2.5.1",
     "should": "9.0.2",
     "sinon": "1.17.4",
-    "sinon-chai": "2.8.0"
+    "sinon-chai": "2.8.0",
+    "supertest": "1.2.0"
   },
   "dependencies": {
     "async": "1.5.2",
@@ -23,7 +26,6 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha",
-    "coverage" : "nodemon --ext js --exec istanbul cover C:\\Users\\maoly\\AppData\\Roaming\\npm\\node_modules\\mocha\\bin\\_mocha"
+    "test": "nodemon --ext js --exec istanbul cover .\\node_modules\\mocha\\bin\\_mocha"
   }
 }

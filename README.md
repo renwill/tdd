@@ -71,6 +71,8 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 # Coding style:
 ### A. Native JavsScript
 - Syntax and grammar
+  - Use single quotes for strings
+  - Limit to 80 characters per line
   - Use semicolons at the end of statement, assignment
       ```
       var a = 1; // This is an assignment, has semicolon ;
@@ -82,6 +84,24 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
           ...
       } //This is not an assignment. No semicolon ;
       ```
+  - Opening braces go on the same line
+    *Right:*
+
+    ```js
+    if (true) {
+      console.log('winning');
+    }
+    ```
+
+    *Wrong:*
+
+    ```js
+    if (true)
+    {
+      console.log('losing');
+    }
+    ```
+
   - Use === and !== over == and !=.
   - Avoid eval().
   - Avoid with.
@@ -91,7 +111,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
     - Each **semicolon (;)** at the end of a statement should be followed with a **line break**.
     - Each **semicolon (;)** in the control part of a for statement should be followed with a **space**.
     - No space between nameOfFunction and **left parenthesis (**. One space between **right parenthesis )** and the **left curly brace {**. Example:
-      ```
+      ```js
       function nameOfFunction(a, b) {
         // nameOfFunction[no space here](
         // a, b)[one space here]{
@@ -108,7 +128,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
     - All variables should be declared before used.
     - It is preferred that each variable has declarative statement (and comment). They should be listed in alphabetical order if possible.
 
-        ```
+        ```js
         var currentEntry; // currently selected table entry
         var level;        // indentation level
         var size;         // size of table
@@ -116,6 +136,144 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
   - Function
     - All functions should be declared before they are used.
 
+  - Name your closures
+
+	Feel free to give your closures a name. It shows that you care about them, and will produce better stack traces, heap and cpu profiles.
+	```js
+	// Good
+	req.on('end', function onEnd() {
+	  console.log('winning');
+	});
+	// Bad
+	req.on('end', function() {
+	  console.log('losing');
+	});
+	```
+
+- No nested closures
+
+	Use closures, but do not nest them. Otherwise your code will become a mess.
+	```js
+	// Good
+	setTimeout(function() {
+	  client.connect(afterConnect);
+	}, 1000);
+
+	function afterConnect() {
+	  console.log('winning');
+	}
+	// Bad
+	setTimeout(function() {
+	  client.connect(function() {
+		console.log('losing');
+	  });
+	}, 1000);
+	```
+
+  - Constructors
+
+	Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you will overwrite the base!
+	```
+	function Jedi() {
+	  console.log('new jedi');
+	}
+
+	// bad
+	Jedi.prototype = {
+	  fight: function fight() {
+		console.log('fighting');
+	  },
+
+	  block: function block() {
+		console.log('blocking');
+	  }
+	};
+
+	// good
+	Jedi.prototype.fight = function fight() {
+	  console.log('fighting');
+	};
+
+	Jedi.prototype.block = function block() {
+	  console.log('blocking');
+	};
+	```
+
+    Methods can return this to help with method chaining.
+    ```
+    // bad
+    Jedi.prototype.jump = function() {
+      this.jumping = true;
+      return true;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+      this.height = height;
+    };
+
+    var luke = new Jedi();
+    luke.jump(); // => true
+    luke.setHeight(20) // => undefined
+
+    // good
+    Jedi.prototype.jump = function() {
+      this.jumping = true;
+      return this;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+      this.height = height;
+      return this;
+    };
+
+    var luke = new Jedi();
+
+    luke.jump()
+      .setHeight(20);
+    ```
 
 - B. Node.JS
   - 4 space for indentation
+
+  - Error handling
+  - Always check for errors in callbacks
+
+  ```javascript
+  //bad
+  database.get('pokemons', function(err, pokemons) {
+    console.log(pokemons);
+  });
+
+  //good
+  database.get('drabonballs', function(err, drabonballs) {
+    if (err) {
+      // handle the error somehow, maybe return with a callback
+      return console.log(err);
+    }
+    console.log(drabonballs);
+  });
+  ```
+
+  - Return on callbacks
+
+  ```javascript
+  //bad
+  database.get('drabonballs', function(err, drabonballs) {
+    if (err) {
+      // if not return here
+      console.log(err);
+    }
+    // this line will be executed as well
+    console.log(drabonballs);
+  });
+
+  //good
+  database.get('drabonballs', function(err, drabonballs) {
+    if (err) {
+      // handle the error somehow, maybe return with a callback
+      return console.log(err);
+    }
+    console.log(drabonballs);
+  });
+  ```
+

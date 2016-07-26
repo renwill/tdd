@@ -18,10 +18,17 @@ function loadRoutes(dir, app) {
         var fullName = path.join(dir, file);
         var stat = fs.statSync(fullName);
 
+        /* istanbul ignore if */
         if (stat && stat.isDirectory()) {
             loadRoutes(fullName, app);
         } else if (fullName.toLowerCase().indexOf('.js') > -1) {
-            require(fullName)(app);
+            requireModule(fullName, app);
         }
     });
+}
+
+/* istanbul ignore next */
+function requireModule(fullName, app) {
+    // Wrapped for unit testing
+    require(fullName)(app);
 }

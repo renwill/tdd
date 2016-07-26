@@ -20,11 +20,17 @@ function loadModels(dir, obj, mongoose) {
         var fullName = path.join(dir, file);
         var stat = fs.statSync(fullName);
 
+        /* istanbul ignore if */
         if (stat && stat.isDirectory()) {
             loadModels(fullName, obj, mongoose);
         } else if (fullName.toLowerCase().indexOf('.js') > -1) {
-            var model = require(fullName)(mongoose);
-            obj = _.extend(obj, model);
+            loadOneModel(fullName, obj, mongoose);
         }
     });
+}
+
+/* istanbul ignore next */
+function loadOneModel(fullName, obj, mongoose) {
+    var model = require(fullName)(mongoose);
+    _.extend(obj, model);
 }

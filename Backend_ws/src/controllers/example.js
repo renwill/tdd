@@ -3,7 +3,7 @@ var appLogger = global.appLogger;
 
 module.exports = {
     testExample: function(req, res, next) {
-        appLogger.info('called');
+        appLogger.info('example called');
         res.json('test');
     }
 };
