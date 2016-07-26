@@ -1,3 +1,27 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installtion](#installtion)
+    - [1. Install Nodemon](#1-install-nodemon)
+    - [2. Install Mocha](#2-install-mocha)
+    - [3. Install Istanbul](#3-install-istanbul)
+- [Start the application from template](#start-the-application-from-template)
+    - [1. Copy template from repository](#1-copy-template-from-repository)
+    - [2. Install dependencies](#2-install-dependencies)
+    - [3. Run scripts introduction (in *package.json*)](#3-run-scripts-introduction-in-packagejson)
+    - [4. Configure run scripts in WebStorm](#4-configure-run-scripts-in-webstorm)
+    - [5. Configure WebStorm JavaScript file template](#5-configure-webstorm-javascript-file-template)
+- [Development](#development)
+    - [A. General](#a-general)
+      - [4. Test case examples](#4-test-case-examples)
+- [Coding style:](#coding-style)
+    - [A. Native JavaScript](#a-native-javascript)
+    - [B. Node.JS](#b-nodejs)
+    - [C. Mongoose](#c-mongoose)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Installtion
 ### 1. Install [Nodemon](https://github.com/remy/nodemon)
 ```
