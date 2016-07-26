@@ -286,3 +286,20 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
       });
       ```
 
+### C. [Mongoose](http://mongoosejs.com/docs/guide.html)
+- Index
+
+![](./images/mongoose/index.png)
+```js
+//Prefer to use this without changing all the schema files.
+mongoose.connect('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
+// or
+mongoose.createConnection('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
+// or
+animalSchema.set('autoIndex', false);
+// or
+new Schema({..}, { autoIndex: false });
+```
+
+During actual production cutover, request [Mongo DB](https://docs.mongodb.com/manual/tutorial/build-indexes-on-replica-sets/) password and build indexes manually on primary DB. They will be replicated to secondary DBs after primary finishes.
+
