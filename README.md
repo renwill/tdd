@@ -4,8 +4,7 @@
 
 - [Installtion](#installtion)
     - [1. Install Nodemon](#1-install-nodemon)
-    - [2. Install Mocha](#2-install-mocha)
-    - [3. Install Istanbul](#3-install-istanbul)
+    - [2. Install Istanbul](#2-install-istanbul)
 - [Start the application from template](#start-the-application-from-template)
     - [1. Copy template from repository](#1-copy-template-from-repository)
     - [2. Install dependencies](#2-install-dependencies)
@@ -39,11 +38,7 @@ C:\Users\username\AppData\Roaming\npm
 C:\>set PATH=%PATH%;C:\Users\username\AppData\Roaming\npm;
 ```
 
-### 2. Install [Mocha](https://mochajs.org/)
-```
-npm install -g mocha
-```
-### 3. Install [Istanbul](https://github.com/gotwarlost/istanbul)
+### 2. Install [Istanbul](https://github.com/gotwarlost/istanbul)
 ```
 npm install -g istanbul
 ```
@@ -57,6 +52,8 @@ npm install -g istanbul
 
 ### 2. Install dependencies
 In terminal, go to app root folder (where *package.json* is located), run `npm install`
+(Mocha is installed locally for easier setup for 'npm test'. If installed globally, the 'npm test' script will vary for every PC. Typically something like `nodemon --ext js --exec istanbul cover C:\\Users\\maoly\\AppData\\Roaming\\npm\\node_modules\\mocha\\bin\\_mocha`, where the path is relative to npm location and user Id.)
+
 
 ### 3. Run scripts introduction (in *package.json*)
 - `npm start`: Monitor file changes for automatic server restart
