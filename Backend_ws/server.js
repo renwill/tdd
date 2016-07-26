@@ -1,6 +1,4 @@
 'use strict';
-
-global.componentId = 'njdomxxxxxxx';
 /***************************************************
  * Config Setup
  ***************************************************/
@@ -19,7 +17,7 @@ try {
     if (!fs.existsSync(appConfigPath)) {
         console.log(new Date().toISOString(), 'Missing application config! Expected config file at path: ', appConfigPath);
     } else {
-        nconf.use(global.componentId + '-app', {
+        nconf.use('app', {
             type : 'file',
             file : appConfigPath
         });
@@ -34,7 +32,7 @@ try {
     if (!fs.existsSync(defaultConfigPath)) {
         console.log(new Date().toISOString(), 'Missing default config! Expected config file at path: ', defaultConfigPath);
     } else {
-        nconf.use(global.componentId + '-default', {
+        nconf.use('default', {
             type : 'file',
             file : defaultConfigPath
         });
@@ -65,7 +63,7 @@ process.on('unhandledRejection', function(reason, p) {
 
 process.on('SIGTERM', function() {
     appLogger.info('Shutting down');
-    process.exit(0);
+    process.exit(1);
 });
 
 require('./express');

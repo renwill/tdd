@@ -40,7 +40,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(8080, function(){
-  appLogger.info('Express server listening on port 8080');
+  appLogger.info('Express server listening...');
 });
 
 module.exports = app;
