@@ -141,20 +141,45 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 ----
 # Coding style:
 ### A. Native JavaScript
-- Syntax and grammar
+- Formatting
   - Use **4 spaces** for indentation. Avoid **tabs**.
-  - Use **single quotes '** for strings
-  - Limit to 80 characters per line
-  - Use semicolons at the end of statement, assignment
-      ```js
-      var a = 1; // This is an assignment, has semicolon ;
-      var fn = function(a) {
-          ...
-      }; // This is also an assignment, has semicolon ;
+  - Use **single quotes '** for strings, unless you are writing JSON.
+  - Declare one variable per var statement. All variables/functions should be declared before use. It isn't always possible to initialize variables at the point of declaration, so deferred initialization is fine.
+    ```js
+    // Good
+    var keys   = ['foo', 'bar'];
+    var values = [23, 42];
 
-      function foo(a) {
-          ...
-      } //This is not an assignment. No semicolon ;
+    var object = {};
+    while (keys.length) {
+      var key = keys.pop();
+      object[key] = values.pop();
+    }
+
+    // Bad
+    var keys = ['foo', 'bar'],
+        values = [23, 42],
+        object = {},
+        key;
+
+    while (keys.length) {
+      key = keys.pop();
+      object[key] = values.pop();
+    }
+    ```
+
+  - Limit to 80 characters per line
+
+  - Always use semicolons at the end of statement, assignment
+    Gotha point: Semicolons should be included at the end of function **expressions**, but not at the end of function **declarations**. The distinction is best illustrated with an example:
+      ```js
+      var foo = function() {
+        return true;
+      };  // semicolon here.
+
+      function foo() {
+        return true;
+      }  // no semicolon here.
       ```
   - Opening braces go on the same line
     ```js
@@ -170,11 +195,6 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     }
     ```
 
-  - Use === and !== over == and !=.
-  - Avoid eval().
-  - Avoid with.
-  - All variables/functions should be declared before used.
-
   - Whitespace
     - Every **comma (,)** should be followed by a space or a **line break**.
     - Each **semicolon (;)** at the end of a statement should be followed with a **line break**.
@@ -186,6 +206,106 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         // a, b)[one space here]{
       }
       ```
+
+
+- Logical operators
+  - Use === and !== over == and !=.
+  - Use isNaN() for NaN testing.
+  - Use multi-line ternary operator
+    ```js
+    //Good
+    var foo = (a === b)
+      ? 1
+      : 2;
+
+    // Bad
+    var foo = (a === b) ? 1 : 2;
+    ```
+  - Use descriptive conditions
+    Any non-trivial conditions should be assigned to a descriptively named variable or function:
+    ```js
+    // Good
+    var isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
+
+    if (isValidPassword) {
+      console.log('winning');
+    }
+
+    // Bad
+    if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
+      console.log('losing');
+    }
+    ```
+
+- Functions
+  - Do not use wrapper objects for primitive types. Declare primitive types in literal form.
+    ```js
+    // Good
+    var x = false;
+
+    // Bad
+    var x = new Boolean(false);
+    ```
+
+  - Use Array and Object literals instead of Array and Object constructors.
+
+    **Good**
+    ```js
+    // Array
+    var a = [x1, x2, x3];
+    var a2 = [x1, x2];
+    var a3 = [x1];
+    var a4 = [];
+
+    // Object
+    var o = {}; // Empty object
+    var o2 = {
+      a: 0,
+      b: 1,
+      c: 2,
+      'strange key': 3
+    };
+    ```
+
+    **Bad**
+    ```js
+    // Array
+    // Length is 3.
+    var a1 = new Array(x1, x2, x3);
+
+    // Length is 2.
+    var a2 = new Array(x1, x2);
+
+    // If x1 is a number and it is a natural number the length will be x1.
+    // If x1 is a number but not a natural number this will throw an exception.
+    // Otherwise the array will have one element with x1 as its value.
+    var a3 = new Array(x1);
+
+    // Length is 0.
+    var a4 = new Array();
+
+    // Object
+    var o = new Object(); // Empty object
+
+    var o2 = new Object();
+    o2.a = 0;
+    o2.b = 1;
+    o2.c = 2;
+    o2['strange key'] = 3;
+    ```
+
+  - Avoid eval().
+  - Avoid with.
+  - Avoid JavaScript native stuff unless you are absolutely sure what you are doing.
+
+    E.g., stuff such as Object.freeze, Object.preventExtensions, Object.seal. And avoid extending built-in prototypes.
+    ```js
+    // Do not do this
+    Array.prototype.empty = function() {
+      return !this.length;
+    }
+    ```
+
   - No nested closures
 	```js
 	// Good
@@ -206,9 +326,44 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	```
 
 - Naming
-  - **Identifier** (variables and functions): **camelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
-  - **Constructor** (functions that must be used with the new prefix): start with a **Capital** letter.
-  - **Global** variables (in browsers): in **CAPITAL** letters.
+  In general, use functionNamesLikeThis, variableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenameslikethis.js.
+
+  In detail:
+  - **variables, properties and function**: **lowerCamelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
+    ```js
+    // Good
+    var adminUser = db.query('SELECT * FROM users ...');
+
+    // Bad
+    var admin_user = db.query('SELECT * FROM users ...');
+    ```
+  - **Constructor** (functions that must be used with the new prefix, you could also call it Class [if you insist]): **UpperCamelCase**
+    ```js
+    // Good
+    function BankAccount() {
+    }
+
+    // Bad
+    function bank_Account() {
+    }
+    ```
+  - **Global** variables (in browsers): in **UPPERCASE** letters. Constants should be declared as regular variables or static class properties, using all uppercase letters.
+    ```js
+    // Good
+    var SECOND = 1 * 1000;
+
+    function File() {
+    }
+    File.FULL_PERMISSIONS = 0777;
+
+    // Bad
+    const SECOND = 1 * 1000;
+
+    function File() {
+    }
+    File.fullPermissions = 0777;
+    ```
+
 
   - Name your closures
 
@@ -235,7 +390,16 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	  console.log('new jedi');
 	}
 
-	// bad
+	// Good
+	Jedi.prototype.fight = function fight() {
+	  console.log('fighting');
+	};
+
+	Jedi.prototype.block = function block() {
+	  console.log('blocking');
+	};
+
+	// Bad
 	Jedi.prototype = {
 	  fight: function fight() {
 		console.log('fighting');
@@ -245,34 +409,11 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 		console.log('blocking');
 	  }
 	};
-
-	// good
-	Jedi.prototype.fight = function fight() {
-	  console.log('fighting');
-	};
-
-	Jedi.prototype.block = function block() {
-	  console.log('blocking');
-	};
 	```
 
     Methods can return this to help with method chaining.
     ```js
-    // bad
-    Jedi.prototype.jump = function() {
-      this.jumping = true;
-      return true;
-    };
-
-    Jedi.prototype.setHeight = function(height) {
-      this.height = height;
-    };
-
-    var luke = new Jedi();
-    luke.jump(); // => true
-    luke.setHeight(20) // => undefined
-
-    // good
+    // Good
     Jedi.prototype.jump = function() {
       this.jumping = true;
       return this;
@@ -287,18 +428,27 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
     luke.jump()
       .setHeight(20);
+
+    // Bad
+    Jedi.prototype.jump = function() {
+      this.jumping = true;
+      return true;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+      this.height = height;
+    };
+
+    var luke = new Jedi();
+    luke.jump(); // => true
+    luke.setHeight(20) // => undefined
     ```
 
 ### B. Node.JS
   - Error handling
     - Always check for errors in callbacks
         ```js
-        //bad
-        database.get('pokemons', function(err, pokemons) {
-            console.log(pokemons);
-        });
-
-        //good
+        // Good
         database.get('drabonballs', function(err, drabonballs) {
             if (err) {
                 // handle the error somehow, maybe return with a callback
@@ -306,11 +456,25 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
             }
             console.log(drabonballs);
         });
+
+        // Bad
+        database.get('pokemons', function(err, pokemons) {
+            console.log(pokemons);
+        });
         ```
 
     - Return on callbacks
       ```js
-      //bad
+      // Good
+      database.get('drabonballs', function(err, drabonballs) {
+        if (err) {
+          // handle the error somehow, maybe return with a callback
+          return console.log(err);
+        }
+        console.log(drabonballs);
+      });
+
+      // Bad
       database.get('drabonballs', function(err, drabonballs) {
         if (err) {
           // if not return here
@@ -319,14 +483,8 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         // this line will be executed as well
         console.log(drabonballs);
       });
-
-      //good
-      database.get('drabonballs', function(err, drabonballs) {
-        if (err) {
-          // handle the error somehow, maybe return with a callback
-          return console.log(err);
-        }
-        console.log(drabonballs);
-      });
       ```
 
+Reference:
+1. [Node.js Style Guide](https://github.com/felixge/node-style-guide)
+2. [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
