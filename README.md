@@ -34,44 +34,72 @@ npm install -g istanbul
 In terminal, go to app root folder (where *package.json* is located), run `npm install`
 
 ### 3. Run scripts introduction (in *package.json*)
-- `npm start`: Monitor file changes for automatic server restart (Whilst nodemon is running, type rs to restart Nodemon)
-- `npm test`: Monitor file changes for automatic testing
-- `npm coverage`: Monitor file changes for automatic testing + coverage report generation
+- `npm start`: Monitor file changes for automatic server restart
+- `npm test`: Monitor file changes for automatic testing + coverage report generation (Do not lock the report files)
 
-### 4. Setup WebStorm for run scripts
+### 4. Configure run scripts in WebStorm
 
-![](./images/autotest/edit_config.png)
+* Run > Edit Configurations
+
+    ![](./images/autotest/edit_config.png)
 
 *  Add new npm config
 
-![](./images/autotest/add_new_npm.png)
+    ![](./images/autotest/add_new_npm.png)
 
-*  Update correct location for package.json and put **test** in Scripts
+*  Update correct location for *package.json* and fill in **test** in Scripts
 
-![](./images/autotest/npm_nodemon_webstorm.png)
+    ![](./images/autotest/npm_nodemon_webstorm.png)
 
 *  Run npm config just created and nodemon will run with coverage test in Webstorm output window
 
-![](./images/autotest/run_npm.png)
+    ![](./images/autotest/run_npm.png)
 
-![](./images/autotest/report.png)
+    ![](./images/autotest/report.png)
 
-**Repeat the same steps for `npm coverage` and `npm start`.**
+**Repeat the same steps for `npm start`.**
 
-![](./images/autotest/npms.png)
+### 5. Configure WebStorm JavaScript file template
+
+- File > New > Edit File Templates
+
+    ![](./images/fileTemplate/edit_file_templates.png)
+
+- Add 'use strict;' to JavaScript template. Save.
+
+    ![](./images/fileTemplate/js_template.png)
 
 ----
 
 # Development
 
-### 1. Name your application
-* Fill in application/developer information in *package.json*
+### A. General
+- Name your application
+
+  - Fill in application/developer information in *package.json*
+  - Name the base folder
+
+- Follow the folder structure. Keep ./test in sync with ./src.
+- Put external dependencies setup/initialization codes in ./src/assets. This folder is excluded for coverage report (defined in .istanbul.yml)
+
+
+#### 4. Test case examples
+| Test purpose | Example folder    |
+|:----|:----|
+| Express middleware |./Examples/express  |
+| fs |./Examples/fs  |
+| Mongoose |./Examples/mongoose  |
+| Fake timeout |./Examples/timeout  |
+| Web service |./Examples/webservice  |
+| Private function |./Examples/private  |
+
 
 ----
 # Coding style:
-### A. Native JavsScript
+### A. Native JavaScript
 - Syntax and grammar
-  - Use single quotes for strings
+  - Use **4 spaces** for indentation. Avoid **tabs**.
+  - Use **single quotes '** for strings
   - Limit to 80 characters per line
   - Use semicolons at the end of statement, assignment
       ```
@@ -85,17 +113,13 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
       } //This is not an assignment. No semicolon ;
       ```
   - Opening braces go on the same line
-    *Right:*
-
     ```js
+    // Good
     if (true) {
       console.log('winning');
     }
-    ```
 
-    *Wrong:*
-
-    ```js
+    // Bad
     if (true)
     {
       console.log('losing');
@@ -105,6 +129,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
   - Use === and !== over == and !=.
   - Avoid eval().
   - Avoid with.
+  - All variables/functions should be declared before used.
 
   - Whitespace
     - Every **comma (,)** should be followed by a space or a **line break**.
@@ -117,42 +142,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
         // a, b)[one space here]{
       }
       ```
-
-- Naming
-  - **Identifier** (variables and functions): **camelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
-  - **Constructor** (functions that must be used with the new prefix): start with a **Capital** letter.
-  - **Global** variables (in browsers): in **CAPITAL** letters.
-
-- Declarations
-  - Variable
-    - All variables should be declared before used.
-    - It is preferred that each variable has declarative statement (and comment). They should be listed in alphabetical order if possible.
-
-        ```js
-        var currentEntry; // currently selected table entry
-        var level;        // indentation level
-        var size;         // size of table
-        ```
-  - Function
-    - All functions should be declared before they are used.
-
-  - Name your closures
-
-	Feel free to give your closures a name. It shows that you care about them, and will produce better stack traces, heap and cpu profiles.
-	```js
-	// Good
-	req.on('end', function onEnd() {
-	  console.log('winning');
-	});
-	// Bad
-	req.on('end', function() {
-	  console.log('losing');
-	});
-	```
-
-- No nested closures
-
-	Use closures, but do not nest them. Otherwise your code will become a mess.
+  - No nested closures
 	```js
 	// Good
 	setTimeout(function() {
@@ -162,6 +152,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 	function afterConnect() {
 	  console.log('winning');
 	}
+
 	// Bad
 	setTimeout(function() {
 	  client.connect(function() {
@@ -170,6 +161,28 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 	}, 1000);
 	```
 
+- Naming
+  - **Identifier** (variables and functions): **camelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.
+  - **Constructor** (functions that must be used with the new prefix): start with a **Capital** letter.
+  - **Global** variables (in browsers): in **CAPITAL** letters.
+
+  - Name your closures
+
+	Feel free to give your closures a name. It shows that you care about them, and will produce better stack traces, heap and cpu profiles.
+	```js
+	// Good
+	req.on('end', function onEnd() {
+	  console.log('winning');
+	});
+
+	// Bad
+	req.on('end', function() {
+	  console.log('losing');
+	});
+	```
+
+
+- OO related
   - Constructors
 
 	Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you will overwrite the base!
@@ -232,48 +245,44 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
       .setHeight(20);
     ```
 
-- B. Node.JS
-  - 4 space for indentation
-
+### B. Node.JS
   - Error handling
-  - Always check for errors in callbacks
+    - Always check for errors in callbacks
+        ```js
+        //bad
+        database.get('pokemons', function(err, pokemons) {
+            console.log(pokemons);
+        });
 
-  ```javascript
-  //bad
-  database.get('pokemons', function(err, pokemons) {
-    console.log(pokemons);
-  });
+        //good
+        database.get('drabonballs', function(err, drabonballs) {
+            if (err) {
+                // handle the error somehow, maybe return with a callback
+                return console.log(err);
+            }
+            console.log(drabonballs);
+        });
+        ```
 
-  //good
-  database.get('drabonballs', function(err, drabonballs) {
-    if (err) {
-      // handle the error somehow, maybe return with a callback
-      return console.log(err);
-    }
-    console.log(drabonballs);
-  });
-  ```
+    - Return on callbacks
+      ```js
+      //bad
+      database.get('drabonballs', function(err, drabonballs) {
+        if (err) {
+          // if not return here
+          console.log(err);
+        }
+        // this line will be executed as well
+        console.log(drabonballs);
+      });
 
-  - Return on callbacks
-
-  ```javascript
-  //bad
-  database.get('drabonballs', function(err, drabonballs) {
-    if (err) {
-      // if not return here
-      console.log(err);
-    }
-    // this line will be executed as well
-    console.log(drabonballs);
-  });
-
-  //good
-  database.get('drabonballs', function(err, drabonballs) {
-    if (err) {
-      // handle the error somehow, maybe return with a callback
-      return console.log(err);
-    }
-    console.log(drabonballs);
-  });
-  ```
+      //good
+      database.get('drabonballs', function(err, drabonballs) {
+        if (err) {
+          // handle the error somehow, maybe return with a callback
+          return console.log(err);
+        }
+        console.log(drabonballs);
+      });
+      ```
 
