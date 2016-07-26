@@ -146,7 +146,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   - Use **single quotes '** for strings
   - Limit to 80 characters per line
   - Use semicolons at the end of statement, assignment
-      ```
+      ```js
       var a = 1; // This is an assignment, has semicolon ;
       var fn = function(a) {
           ...
@@ -230,7 +230,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   - Constructors
 
 	Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you will overwrite the base!
-	```
+	```js
 	function Jedi() {
 	  console.log('new jedi');
 	}
@@ -257,7 +257,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	```
 
     Methods can return this to help with method chaining.
-    ```
+    ```js
     // bad
     Jedi.prototype.jump = function() {
       this.jumping = true;
