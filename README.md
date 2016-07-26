@@ -14,11 +14,12 @@
     - [5. Configure WebStorm JavaScript file template](#5-configure-webstorm-javascript-file-template)
 - [Development](#development)
     - [A. General](#a-general)
-      - [4. Test case examples](#4-test-case-examples)
+    - [B. Express](#b-express)
+    - [C. Test case examples](#c-test-case-examples)
+    - [D. Mongoose](#d-mongoose)
 - [Coding style:](#coding-style)
     - [A. Native JavaScript](#a-native-javascript)
     - [B. Node.JS](#b-nodejs)
-    - [C. Mongoose](#c-mongoose)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -107,7 +108,12 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 - Put external dependencies setup/initialization codes in ./src/assets. This folder is excluded for coverage report (defined in .istanbul.yml)
 
 
-#### 4. Test case examples
+### B. Express
+- Put route files in ./src/routes. They will be loaded by index.js.
+- Put controller files in ./src/controllers. They will be loaded by routes.
+- Create one file per Mongoose model.
+
+### C. Test case examples
 | Test purpose | Example folder    |
 |:----|:----|
 | Express middleware |./Examples/express  |
@@ -116,6 +122,23 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 | Fake timeout |./Examples/timeout  |
 | Web service |./Examples/webservice  |
 | Private function |./Examples/private  |
+
+### D. [Mongoose](http://mongoosejs.com/docs/guide.html)
+- Index
+
+![](./images/mongoose/index.png)
+```js
+//Prefer to use this without changing all the schema files.
+mongoose.connect('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
+// or
+mongoose.createConnection('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
+// or
+animalSchema.set('autoIndex', false);
+// or
+new Schema({..}, { autoIndex: false });
+```
+
+During actual production cutover, request [Mongo DB](https://docs.mongodb.com/manual/tutorial/build-indexes-on-replica-sets/) password and build indexes manually on primary DB. They will be replicated to secondary DBs after primary finishes.
 
 
 ----
@@ -309,21 +332,4 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
         console.log(drabonballs);
       });
       ```
-
-### C. [Mongoose](http://mongoosejs.com/docs/guide.html)
-- Index
-
-![](./images/mongoose/index.png)
-```js
-//Prefer to use this without changing all the schema files.
-mongoose.connect('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
-// or
-mongoose.createConnection('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
-// or
-animalSchema.set('autoIndex', false);
-// or
-new Schema({..}, { autoIndex: false });
-```
-
-During actual production cutover, request [Mongo DB](https://docs.mongodb.com/manual/tutorial/build-indexes-on-replica-sets/) password and build indexes manually on primary DB. They will be replicated to secondary DBs after primary finishes.
 
