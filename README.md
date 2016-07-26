@@ -144,7 +144,9 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 - Formatting
   - Use **4 spaces** for indentation. Avoid **tabs**.
   - Use **single quotes '** for strings, unless you are writing JSON.
-  - Declare one variable per var statement. All variables/functions should be declared before use. It isn't always possible to initialize variables at the point of declaration, so deferred initialization is fine.
+  - Declare one variable per var statement. All variables/functions should be declared before use.
+
+    It isn't always possible to initialize variables at the point of declaration, so deferred initialization is fine.
     ```js
     // Good
     var keys   = ['foo', 'bar'];
@@ -171,6 +173,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   - Limit to 80 characters per line
 
   - Always use semicolons at the end of statement, assignment
+
     Gotha point: Semicolons should be included at the end of function **expressions**, but not at the end of function **declarations**. The distinction is best illustrated with an example:
       ```js
       var foo = function() {
@@ -326,6 +329,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	```
 
 - Naming
+
   In general, use functionNamesLikeThis, variableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenameslikethis.js.
 
   In detail:
@@ -347,7 +351,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     function bank_Account() {
     }
     ```
-  - **Global** variables (in browsers): in **UPPERCASE** letters. Constants should be declared as regular variables or static class properties, using all uppercase letters.
+  - **Constants** should be declared as regular variables or static class properties, using all **UPPERCASE** letters.
     ```js
     // Good
     var SECOND = 1 * 1000;
@@ -486,5 +490,8 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
       ```
 
 Reference:
+
 1. [Node.js Style Guide](https://github.com/felixge/node-style-guide)
+
 2. [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
+
