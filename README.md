@@ -44,7 +44,7 @@ npm install -g istanbul
 ```
 ### 3. Install [Mongo DB 3.2](https://www.mongodb.com/download-center?jmp=docs&_ga=1.248972366.858031266.1454547591#enterprise)
 
-Start Mongod instance on local PC. Make sure that it is accessible from shell.
+Start Mongod instance on local PC. Make sure that it is accessible from shell. Your code will need it.
 ```
 > mongo
 ```
@@ -130,17 +130,35 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
 ![](./images/mongoose/index.png)
 ```js
-//Prefer to use this without changing all the schema files.
-mongoose.connect('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
-// or
+// Doesn't work for me
+// mongoose.connect('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
+// Didn't try
 mongoose.createConnection('mongodb://user:pass@localhost:port/database', { config: { autoIndex: false } });
-// or
+// Work
 animalSchema.set('autoIndex', false);
-// or
+// Work
 new Schema({..}, { autoIndex: false });
 ```
 
 During actual production cutover, request [Mongo DB](https://docs.mongodb.com/manual/tutorial/build-indexes-on-replica-sets/) password and build indexes manually on primary DB. They will be replicated to secondary DBs after primary finishes.
+
+### E. Recommended library
+- winston       : Logger
+- HTTP web service invocation
+    - http      : support for the raw HTTP protocol. While it can do everything, often it's a bit clumsy to use.
+    - request   : uses the http module and adds a lot of sugar to make it easier to digest: A lot of common cases can be handled with just a tiny bit of code, it supports piping request data, forwarding requests to a different server, etc.
+- nodemailer: Send e-mails
+- fs        : file System
+- moment    : date time operation
+- bcrypt    : native JS bcrypt library for NodeJS
+- async     : asynchronous operations
+- xml2js    : XML to JavaScript object
+- Lo-Dash   : superset of Underscore
+    - compare to Underscore
+        + speed advantage over Underscore on a variety of operations
+        + more functions
+        + more frequent commits
+        - large file size   (22kb vs 5kb, but not matter for backend task)
 
 
 ----

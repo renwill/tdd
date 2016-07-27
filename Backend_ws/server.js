@@ -58,9 +58,6 @@ var options = {
         socketOptions: {
             connectTimeoutMS : dbConnectionTimeoutMS
         }
-    },
-    config: {
-        autoIndex: false
     }
 };
 
