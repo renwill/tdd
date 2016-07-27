@@ -42,7 +42,12 @@ C:\>set PATH=%PATH%;C:\Users\username\AppData\Roaming\npm;
 ```
 npm install -g istanbul
 ```
+### 3. Install [Mongo DB 3.2](https://www.mongodb.com/download-center?jmp=docs&_ga=1.248972366.858031266.1454547591#enterprise)
 
+Start Mongod instance on local PC. Make sure that it is accessible from shell.
+```
+> mongo
+```
 ----
 
 # Start the application from template

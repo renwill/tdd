@@ -6,6 +6,7 @@ var path = require('path');
 var fs = require('fs');
 var nconf = require('nconf');
 var winston = require('winston');
+var mongoose = require('mongoose');
 var configDir = path.join(__dirname, 'config');
 var appLogger;
 var appConfigPath;
@@ -48,6 +49,24 @@ try {
 global.appLogger = require(path.join(__dirname, 'src', 'assets', 'appLogger'));
 appLogger = global.appLogger;
 appLogger.initApp(nconf.get('loggerConfig'));
+
+var models = require("./src/models")(mongoose);
+var dbConnectionUrl = nconf.get('dbConnectionUrl');
+var dbConnectionTimeoutMS = nconf.get('dbConnectionTimeoutMS');
+var options = {
+    server: {
+        socketOptions: {
+            connectTimeoutMS : dbConnectionTimeoutMS
+        }
+    },
+    config: {
+        autoIndex: false
+    }
+};
+
+mongoose.connect(dbConnectionUrl, options, function(){
+    appLogger.info('Mongo DB connected...');
+});
 
 
 /* Handle process level uncaught exceptions */

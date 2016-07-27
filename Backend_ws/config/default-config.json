@@ -6,5 +6,7 @@
     "accessLogDisabled": false,
     "accessLogLevel": "info",
     "accessLogPath": "./logs/access.log"
-  }
+  },
+  "dbConnectionUrl": "mongodb://localhost:27017/test",
+  "dbConnectionTimeoutMS": 30000
 }
