@@ -1,21 +1,22 @@
 'use strict';
 var Example = require('mongoose').model('Example');
-var wsUtil = require('./../utils/sendjsonhelper');
+var wsUtil = require('./../utils/sendJsonHelper');
 var appLogger = global.appLogger;
 
 module.exports = {
     testExample: function(req, res, next) {
         appLogger.info('example called');
+
         Example.create({
-            test: "test message",
+            test: 'test message',
             datetime_gmt: new Date()
-        }, function(err){
-           if (err) {
-               return next(err);
-           }
+        }, function(err) {
+            if (err) {
+                return next(err);
+            }
             else {
-               wsUtil.sendJson(res, 'test completed.');
-           }
+                wsUtil.sendJson(res, 'test completed.');
+            }
         });
     }
 };

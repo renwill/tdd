@@ -353,7 +353,8 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 - Naming
 
-  In general, use functionNamesLikeThis, variableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenameslikethis.js.
+  In general, use functionNamesLikeThis, _privateFunctionNamesLikeThis,
+  variableNamesLikeThis, _privateVariableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenamesLikeThis.js.
 
   In detail:
   - **variables, properties and function**: **lowerCamelCase**. (exception below). Do not use underscore (_) as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy.

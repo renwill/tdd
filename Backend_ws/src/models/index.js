@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 
-module.exports = function(mongoose) {
+module.exports = function (mongoose) {
     var obj = {};
     loadModels(__dirname, obj, mongoose);
     return obj;
@@ -11,7 +11,7 @@ module.exports = function(mongoose) {
 
 function loadModels(dir, obj, mongoose) {
     var list = fs.readdirSync(dir);
-    list.forEach(function(file) {
+    list.forEach(function (file) {
 
         if (file == 'index.js') {
             return;

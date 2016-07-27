@@ -13,7 +13,7 @@ describe('Example route', function() {
         request(app)
             .get('/example')
             .expect('Content-Type', /json/)
-            .end(function(err, res){
+            .end(function(err){
                 if (err) throw err;
                 done();
             });
@@ -23,7 +23,7 @@ describe('Example route', function() {
         request(app)
             .get('/notRegistered')
             .expect(404)
-            .end(function(err, res){
+            .end(function(err){
                 if (err) throw err;
                 done();
             });

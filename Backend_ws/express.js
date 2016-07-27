@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 /***************************************************
  * Models and Routes Setup
  ***************************************************/
-app.locals.getCtrlPath = function(pCtrlName) {
-  return path.join(__dirname, 'src', 'controllers', pCtrlName);
+app.locals.getCtrlPath = function (pCtrlName) {
+    return path.join(__dirname, 'src', 'controllers', pCtrlName);
 };
 require('./src/routes')(app);
 
@@ -27,20 +27,20 @@ require('./src/routes')(app);
  ***************************************************/
 /* Handle router level uncaught exceptions */
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function notFoundHandler(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.send({success: false, data: err.message});
-  appLogger.error(err);
+app.use(function errorHandler(err, req, res, next) {
+    res.status(err.status || 500);
+    res.send({success: false, data: err.message});
+    appLogger.error(err);
 });
 
-app.listen(8080, function(){
-  appLogger.info('Express server listening...');
+app.listen(8080, function () {
+    appLogger.info('Express server listening...');
 });
 
 module.exports = app;

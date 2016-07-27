@@ -5,12 +5,13 @@
 var path = require('path');
 var fs = require('fs');
 var nconf = require('nconf');
-var winston = require('winston');
 var mongoose = require('mongoose');
 var configDir = path.join(__dirname, 'config');
 var appLogger;
 var appConfigPath;
 var defaultConfigPath;
+
+require('winston');
 
 /* load application config */
 try {
@@ -46,11 +47,12 @@ try {
  * Winston Setup
  ***************************************************/
 // Add appLogger to global object so it can be accessed by all modules
-global.appLogger = require(path.join(__dirname, 'src', 'assets', 'appLogger'));
+global.appLogger = require(path.join(__dirname, 'src', 'utils', 'appLogger'));
 appLogger = global.appLogger;
 appLogger.initApp(nconf.get('loggerConfig'));
 
-var models = require("./src/models")(mongoose);
+
+require('./src/models')(mongoose);
 var dbConnectionUrl = nconf.get('dbConnectionUrl');
 var dbConnectionTimeoutMS = nconf.get('dbConnectionTimeoutMS');
 var options = {
@@ -61,7 +63,7 @@ var options = {
     }
 };
 
-mongoose.connect(dbConnectionUrl, options, function(){
+mongoose.connect(dbConnectionUrl, options, function dbConnected(){
     appLogger.info('Mongo DB connected...');
 });
 

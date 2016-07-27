@@ -3,6 +3,7 @@
     "logDisabled": false,
     "logLevel": "debug",
     "logPath": "./logs/program.log",
+    "logExceptionPath": "./logs/exception.log",
     "accessLogDisabled": false,
     "accessLogLevel": "info",
     "accessLogPath": "./logs/access.log"
