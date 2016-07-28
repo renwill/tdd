@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({extended: true}));
  * Models and Routes Setup
  ***************************************************/
 app.locals.getCtrlPath = function (pCtrlName) {
-    return path.join(__dirname, 'src', 'controllers', pCtrlName);
+    return path.join(__dirname, 'src', 'controller', pCtrlName);
 };
-require('./src/routes')(app);
+require('./src/route')(app);
 
 /***************************************************
  * Exception Handling Setup

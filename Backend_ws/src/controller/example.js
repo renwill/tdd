@@ -1,6 +1,6 @@
 'use strict';
-var Example = require('./../models/example');
-var wsUtil = require('././sendJsonHelper');
+var Example = require('./../model/example');
+var wsUtil = require('./../util/sendJsonHelper');
 var appLogger = global.appLogger;
 
 module.exports = {

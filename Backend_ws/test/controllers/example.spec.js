@@ -4,16 +4,69 @@ var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 var expect = chai.expect;
 var sinon = require('sinon');
+var mongoose = require('mongoose');
+require('sinon-mongoose');
 var rewire = require('rewire');
-var example = rewire('./../../src/controllers/example');
+var exampleCtrl = rewire('./../../src/controller/example');
+var exampleModel = require('./../../src/model/example');
 
 describe('Example', function() {
-    example.__set__('appLogger', {info: function(){}});
+    // Global replace appLogger
+    before(function (done) {
+        exampleCtrl.__set__('appLogger', {
+            info: function () {
+            }
+        });
+        done();
+    });
 
-    it('should send mock response', function () {
-        var res = {json: sinon.spy()};
-        example.testExample({}, res);
+    describe('testExample', function() {
+        describe('When successfully create record', function() {
+            var createStub;
+            var sendspy;
 
-        expect(res.json).calledWith('test');
+            before(function (done) {
+                sendspy = sinon.spy();
+                exampleCtrl.__set__('wsUtil.sendJson', sendspy);
+                createStub = sinon.stub(mongoose.Model, 'create');
+                createStub.yields(null);
+                done();
+            });
+
+            it('should send mock response', function () {
+                exampleCtrl.testExample({}, {});
+                expect(sendspy).calledOnce;
+                expect(sendspy).calledWith({}, 'test completed.');
+            });
+
+            after(function (done) {
+                createStub.restore();
+                done();
+            });
+        });
+
+        describe('When failed to create record', function() {
+            var createStub;
+            var nextSpy;
+            var err = new Error('mock error');
+
+            before(function (done) {
+                nextSpy = sinon.spy();
+                createStub = sinon.stub(mongoose.Model, 'create');
+                createStub.yields(err);
+                done();
+            });
+
+            it('should send error response', function () {
+                exampleCtrl.testExample({}, {}, nextSpy);
+                expect(nextSpy).calledOnce;
+                expect(nextSpy).calledWith(err);
+            });
+
+            after(function (done) {
+                createStub.restore();
+                done();
+            });
+        });
     });
 });

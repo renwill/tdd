@@ -5,7 +5,7 @@ chai.use(sinonChai);
 var expect = chai.expect;
 var sinon = require('sinon');
 var rewire = require('rewire');
-var index = rewire('./../../src/routes/index');
+var index = rewire('./../../src/route/index');
 var mock = require('mock-fs');
 
 describe('Model index.js', function() {
