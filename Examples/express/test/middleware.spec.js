@@ -2,8 +2,8 @@
  * Created by MAOLY on 6/28/2016.
  */
 'use strict';
-var chai = require("chai");
-var sinonChai = require("sinon-chai");
+var chai = require('chai');
+var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 var expect = chai.expect;
 var sinon = require('sinon');
@@ -15,7 +15,7 @@ describe('header', function() {
         var res = { json: sinon.spy()};
         var next = sinon.stub();
         header.getTitle({}, res, next);
-        expect(res.json).calledWith({success: true, data: "NOE DQ Dashboard 2.0"});
+        expect(res.json).calledWith({success: true, data: 'NOE DQ Dashboard 2.0'});
         expect(next).calledOnce;
     });
 
@@ -26,6 +26,6 @@ describe('header', function() {
         header.__set__('sendJson', sendJsonMock);
         header.getTitle({}, {}, next);
         expect(sendJsonMock).calledOnce;
-        expect(sendJsonMock).calledWith({}, "NOE DQ Dashboard 2.0");
+        expect(sendJsonMock).calledWith({}, 'NOE DQ Dashboard 2.0');
     });
 });

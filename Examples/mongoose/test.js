@@ -3,7 +3,6 @@ var User = require('./user.model');
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
 require('sinon-mongoose');
 
 describe('Mongoose testing', function(){
@@ -51,45 +50,6 @@ describe('Mongoose testing', function(){
 		});
 		after(function(done){
 			mock.restore();
-			done();
-		});
-	});
-
-	describe('Using mockgoose', function(){
-
-		before(function(done) {
-		    mockgoose(mongoose).then(function() {
-		        mongoose.connect('mongodb://example.com/TestingDB', function(err) {
-		            done(err);
-		        });
-		    });
-		});
-
-		before(function(done){
-			var user = new User({ name: 'new' });
-			user.save(function (err) {
-			  if (err) 
-			  	done(err);
-			  else{
-			  	console.log('new user inserted');
-			  	done();
-				}
-			});
-		});
-
-		it('should return user new', function(done){
-			userCtrl.findUser('new', function(err, users){
-				expect(err).to.be.null;
-				expect(users).to.be.Array;
-				expect(users).to.be.lengthOf(1);
-				expect(users[0]).to.be.have.property('name');
-				expect(users[0].name).to.equal('new');
-				done();
-			});
-		});
-
-		after(function(done){
-			mockgoose.reset();
 			done();
 		});
 	});

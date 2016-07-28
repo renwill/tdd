@@ -4,7 +4,11 @@
   "description": "timeout demo",
   "main": "foo.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4"
+  },
   "scripts": {
     "test": "mocha"
   },

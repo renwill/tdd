@@ -8,12 +8,12 @@ function sendJson(res, data) {
 
 module.exports = {
     getTitle : function (req, res, next) {
-        sendJson(res, "NOE DQ Dashboard 2.0");
+        sendJson(res, 'NOE DQ Dashboard 2.0');
         next();
     },
 
     getTitle1 : function (req, res, next) {
-        res.json({success: true, data: "NOE DQ Dashboard 2.0"});
+        res.json({success: true, data: 'NOE DQ Dashboard 2.0'});
         next();
     }
 };

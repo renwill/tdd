@@ -1,6 +1,6 @@
 'use strict';
-var Example = require('mongoose').model('Example');
-var wsUtil = require('./../utils/sendJsonHelper');
+var Example = require('./../models/example');
+var wsUtil = require('././sendJsonHelper');
 var appLogger = global.appLogger;
 
 module.exports = {

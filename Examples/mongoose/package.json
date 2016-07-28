@@ -4,14 +4,14 @@
   "description": "mongoose demo",
   "main": "user.controller.js",
   "dependencies": {
+    
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
     "chai": "^3.5.0",
-    "mockgoose": "^6.0.3",
     "mongoose": "^4.5.3",
     "sinon": "^1.17.4",
     "sinon-mongoose": "^1.2.1"
-  },
-  "devDependencies": {
-    "mocha": "^2.5.3"
   },
   "scripts": {
     "test": "mocha"

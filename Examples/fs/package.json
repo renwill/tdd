@@ -4,11 +4,12 @@
   "description": "fs demo",
   "main": "test.js",
   "dependencies": {
-    "mock-fs": "^3.9.0",
-    "chai": "^3.5.0"
+    
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "mock-fs": "^3.9.0",
+    "chai": "^3.5.0"
   },
   "scripts": {
     "test": "mocha"
