@@ -106,6 +106,21 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
     ![](./images/fileTemplate/js_template.png)
 
+### 6. Configure ESLint in WebStorm
+
+* File > Setting
+
+    ![](./images/autotest/eslintSetting.png)
+
+* Languages & Frameworks > Javascript > Code Quality Tools > ESLint
+
+    ![](./images/autotest/eslintCodeQuality.png)
+
+* Click Enable and set ESLint package location (C:\Users\{user_id}\AppData\Roaming\npm\node_modules\eslint)
+
+    ![](./images/autotest/eslintEnable.png)
+
+
 ----
 
 # Development
