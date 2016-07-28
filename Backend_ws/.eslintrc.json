@@ -15,6 +15,12 @@
     },
     "extends": "eslint:recommended",
     "rules": {
+      "max-len": [
+        2,
+        80,
+        4,
+        {"ignoreComments": true}
+      ],
       "indent": [
         "warn",
         4,
