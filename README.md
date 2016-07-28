@@ -5,6 +5,7 @@
 - [Installtion](#installtion)
     - [1. Install Nodemon](#1-install-nodemon)
     - [2. Install Istanbul](#2-install-istanbul)
+    - [3. Install Mongo DB 3.2](#3-install-mongo-db-32)
 - [Start the application from template](#start-the-application-from-template)
     - [1. Copy template from repository](#1-copy-template-from-repository)
     - [2. Install dependencies](#2-install-dependencies)
@@ -16,9 +17,13 @@
     - [B. Express](#b-express)
     - [C. Test case examples](#c-test-case-examples)
     - [D. Mongoose](#d-mongoose)
+    - [E. Recommended library](#e-recommended-library)
+      - [Development](#development-1)
+      - [Testing (refer to ./Examples)](#testing-refer-to-examples)
 - [Coding style:](#coding-style)
     - [A. Native JavaScript](#a-native-javascript)
     - [B. Node.JS](#b-nodejs)
+    - [C. Testing specific](#c-testing-specific)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -143,6 +148,7 @@ new Schema({..}, { autoIndex: false });
 During actual production cutover, request [Mongo DB](https://docs.mongodb.com/manual/tutorial/build-indexes-on-replica-sets/) password and build indexes manually on primary DB. They will be replicated to secondary DBs after primary finishes.
 
 ### E. Recommended library
+#### Development
 - winston       : Logger
 - HTTP web service invocation
     - http      : support for the raw HTTP protocol. While it can do everything, often it's a bit clumsy to use.
@@ -160,6 +166,25 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         + more frequent commits
         - large file size   (22kb vs 5kb, but not matter for backend task)
 
+#### Testing (refer to ./Examples)
+- Web Service:
+  - http
+    - sinon
+      - need to handle stream ourselves
+      - https://codeutopia.net/blog/2015/01/30/how-to-unit-test-nodejs-http-requests/
+    - nock
+      - easier to mock http request
+      - define expected request and then verify
+  - request: sinon
+
+- Mongoose
+  - sinon
+  - sinon-mongoose
+    - plugin for sinon
+    - easier to test with chaining mongoose calls
+
+- fs: mock-fs
+- timeout: sinon (use fake timers)
 
 ----
 # Coding style:
@@ -513,9 +538,86 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
       });
       ```
 
+### C. Testing specific
+- Test case documentation and grammar (2 approaches)
+
+  Rule of thumb:
+    - group related (functionality, situation wise) tests cases(it blocks) under the same describe block
+    - When the number test cases within a describe block increases, try to extract the test cases into a new nested describe block
+
+  - `describe` Class > `describe` Class method > `it` test cases
+    - Individual test case to test the method
+    - Better for few test cases
+  - **`describe` Class > `describe` class method > `describe` scenario > `it` test cases**
+    - Group test cases together tested under same scenario
+    - Better structure when the number of test case increases
+
+  ```js
+    //first level describe
+    //parent block for holding all nested describe block
+    //usually the name of class(or js file)
+    //optional, as name of the test file indicates which class/js file is under test
+    describe('Class', function(){
+
+        //individual describe block for each class.method
+        describe('Class.methodA', function(){
+
+            //1 it block for each expected behaviour under different scenario
+            //better for fewer it blocks
+            it('should xxx when aaa', function(){
+
+            });
+
+            it('should xxx when bbb', function(){
+
+            });
+
+            it('should xxx when ccc', function(){
+
+            });
+
+        });
+
+        //individual describe block for each class.method
+        describe('Class.methodB', function(){
+
+            //individual describe block for each scenario
+            describe('Scenario A/Stage A', function(){
+
+                it('should xxx', function(){
+
+                });
+                it('should xxx', function(){
+
+                });
+
+            });
+
+            describe('Scenario B/Stage B', function(){
+
+                it('should xxx', function(){
+
+                });
+                it('should xxx', function(){
+
+                });
+
+            });
+
+        });
+
+    });
+
+  ```
+
+
+
 Reference:
 
 1. [Node.js Style Guide](https://github.com/felixge/node-style-guide)
 
 2. [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 
+3. [TDD/BDD - Properly defining tests, adjusting tests, putting describe blocks inside it blocks](http://programmers.stackexchange.com/questions/298362/tdd-bdd-properly-defining-tests-adjusting-tests-putting-describe-blocks-insi)
+
+4. [Testing Your JavaScript with Jasmine](http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229)
