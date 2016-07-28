@@ -546,16 +546,16 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 ### C. Testing specific
 - Test case documentation and grammar (2 approaches)
 
-  Rule of thumb:
+  **Rule of thumb**
     - group related (functionality, situation wise) tests cases(it blocks) under the same describe block
     - When the number test cases within a describe block increases, try to extract the test cases into a new nested describe block
 
-  - `describe` Class > `describe` Class method > `it` test cases
-    - Individual test case to test the method
-    - Better for few test cases
-  - **`describe` Class > `describe` class method > `describe` scenario > `it` test cases**
-    - Group test cases together tested under same scenario
-    - Better structure when the number of test case increases
+- `describe` Class > `describe` Class method > `it` test cases
+  - Individual test case to test the method
+  - Better for few test cases
+- **`describe` Class > `describe` class method > `describe` scenario > `it` test cases**
+  - Group test cases together tested under same scenario
+  - Better structure when the number of test case increases
 
   ```js
     //first level describe
