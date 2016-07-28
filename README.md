@@ -6,6 +6,7 @@
     - [1. Install Nodemon](#1-install-nodemon)
     - [2. Install Istanbul](#2-install-istanbul)
     - [3. Install Mongo DB 3.2](#3-install-mongo-db-32)
+    - [4. Install EsLint](#4-install-eslint)
 - [Start the application from template](#start-the-application-from-template)
     - [1. Copy template from repository](#1-copy-template-from-repository)
     - [2. Install dependencies](#2-install-dependencies)
@@ -52,6 +53,10 @@ npm install -g istanbul
 Start Mongod instance on local PC. Make sure that it is accessible from shell. Your code will need it.
 ```
 > mongo
+```
+### 4. Install [EsLint](http://eslint.org/)
+```
+npm install -g eslint
 ```
 ----
 
