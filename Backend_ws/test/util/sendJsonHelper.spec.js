@@ -13,7 +13,10 @@ describe('sendJsonHelper', function() {
             var res = {json: sinon.spy()};
 
             sendJsonHelper.sendErr(res, 'mock err data');
-            expect(res.json).calledWith({success: false, data: 'mock err data'});
+            expect(res.json).calledWith({
+                success: false,
+                data: 'mock err data'
+            });
             expect(res.json).calledOnce;
         });
         

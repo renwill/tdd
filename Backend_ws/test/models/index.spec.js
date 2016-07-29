@@ -5,13 +5,14 @@ chai.use(sinonChai);
 var expect = chai.expect;
 var sinon = require('sinon');
 var rewire = require('rewire');
-var index = rewire('./../../src/model/index');
+var index = rewire('../../src/model/index');
 var mock = require('mock-fs');
 
-describe('Route index.js', function() {
+describe('Model index.js', function() {
     describe('When has one module file', function(){
         before(function(done){
             mock({
+                'index.js' : 'empty content',
                 'test.js' : 'empty content',
                 'b.txt' : 'empty content'
             });
@@ -90,5 +91,18 @@ describe('Route index.js', function() {
         });
     });
 
+    describe('When exported', function(){
+        it('should be exported as an object', function () {
+            var stub = sinon.stub();
+
+            index.__set__('loadModels', stub);
+            index({});
+            expect(stub).to.have.been.called;
+
+            stub.resetBehavior();
+            stub.reset();
+
+        });
+    });
 });
 

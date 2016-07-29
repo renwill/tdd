@@ -13,6 +13,7 @@ describe('Model index.js', function() {
     describe('When has one module file', function(){
         before(function(done){
             mock({
+                'index.js' : 'empty content',
                 'test.js' : 'empty content',
                 'b.txt' : 'empty content'
             });
