@@ -39,6 +39,7 @@
       - [3. Use plural nouns](#3-use-plural-nouns)
       - [4. Use sub-resources for relations](#4-use-sub-resources-for-relations)
       - [5. Handle Errors with HTTP status codes](#5-handle-errors-with-http-status-codes)
+- [Reference:](#reference)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -534,8 +535,11 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     ```
 
 ### B. Node.JS
+
 #### Error handling
+
     - Always check for errors in callbacks
+
         ```js
         // Good
         database.get('drabonballs', function(err, drabonballs) {
@@ -553,6 +557,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         ```
 
     - Return on callbacks
+
       ```js
       // Good
       database.get('drabonballs', function(err, drabonballs) {
@@ -706,7 +711,10 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 
 
-Reference:
+
+
+----
+# Reference:
 
 1. [Node.js Style Guide](https://github.com/felixge/node-style-guide)
 
