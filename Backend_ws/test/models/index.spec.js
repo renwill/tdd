@@ -9,6 +9,19 @@ var index = rewire('../../src/model/index');
 var mock = require('mock-fs');
 
 describe('Model index.js', function() {
+    describe('When exported', function(){
+        it('should be exported as an object', function (done) {
+            var stub = sinon.stub();
+
+            var revert = index.__set__('loadModels', stub);
+            index({});
+            expect(stub).to.have.been.called;
+
+            revert();
+            done();
+        });
+    });
+
     describe('When has one module file', function(){
         before(function(done){
             mock({
@@ -91,18 +104,6 @@ describe('Model index.js', function() {
         });
     });
 
-    describe('When exported', function(){
-        it('should be exported as an object', function () {
-            var stub = sinon.stub();
 
-            index.__set__('loadModels', stub);
-            index({});
-            expect(stub).to.have.been.called;
-
-            stub.resetBehavior();
-            stub.reset();
-
-        });
-    });
 });
 
