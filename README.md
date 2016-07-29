@@ -648,7 +648,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 ### D. Web service API
   Ref: [10 Best Practices for Better RESTful API](http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
- #### 1. Use nouns but no verbs
+#### 1. Use nouns but no verbs
 
  Resource  | GET (Read)             | POST (Create)            | PUT (Update)              | DELETE
 ----------|----------------------|------------------------|-------------------------|--------------------------
