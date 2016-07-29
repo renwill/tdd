@@ -8,6 +8,7 @@ var expect = chai.expect;
 
 describe('CmnUtil', function() {
     it('Should extend format to string prototype', function() {
+        delete String.prototype.format;
         expect(String.prototype.hasOwnProperty('format')).to.be.false;
         require('./../../src/util/CmnUtil');
         expect(String.prototype.hasOwnProperty('format')).to.be.true;

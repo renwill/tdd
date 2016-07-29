@@ -10,22 +10,27 @@ var sinon = require('sinon');
 var rewire = require('rewire');
 var header = rewire('./../app/middleware');
 
-describe('header', function() {
-    it('should return correct msg', function () {
-        var res = { json: sinon.spy()};
-        var next = sinon.stub();
-        header.getTitle({}, res, next);
-        expect(res.json).calledWith({success: true, data: 'NOE DQ Dashboard 2.0'});
-        expect(next).calledOnce;
+describe('Middleware', function() {
+    describe('getTitle1', function (){
+        it('should return correct msg', function () {
+            var res = { json: sinon.spy()};
+            var next = sinon.stub();
+            header.getTitle1({}, res, next);
+            expect(res.json).calledWith({success: true, data: 'NOE DQ Dashboard 2.0'});
+            expect(next).calledOnce;
+        });
+
     });
 
-    it('should call sendJson', function () {
-        var sendJsonMock = sinon.spy();
-        var next = sinon.stub();
+    describe('getTitle1', function (){
+        it('should call sendJson to return message', function () {
+            var sendJsonMock = sinon.spy();
+            var next = sinon.stub();
 
-        header.__set__('sendJson', sendJsonMock);
-        header.getTitle({}, {}, next);
-        expect(sendJsonMock).calledOnce;
-        expect(sendJsonMock).calledWith({}, 'NOE DQ Dashboard 2.0');
+            header.__set__('sendJson', sendJsonMock);
+            header.getTitle({}, {}, next);
+            expect(sendJsonMock).calledOnce;
+            expect(sendJsonMock).calledWith({}, 'NOE DQ Dashboard 2.0');
+        });
     });
 });
