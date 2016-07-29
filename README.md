@@ -3,16 +3,17 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installtion](#installtion)
-    - [1. Install Nodemon](#1-install-nodemon)
-    - [2. Install Istanbul](#2-install-istanbul)
+    - [1. Install Nodemon (File change monitoring and auto-restart/test.)](#1-install-nodemon-file-change-monitoring-and-auto-restarttest)
+    - [2. Install Istanbul (Coverage analysis)](#2-install-istanbul-coverage-analysis)
     - [3. Install Mongo DB 3.2](#3-install-mongo-db-32)
-    - [4. Install EsLint](#4-install-eslint)
+    - [4. Install EsLint (JS linting utility)](#4-install-eslint-js-linting-utility)
 - [Start the application from template](#start-the-application-from-template)
     - [1. Copy template from repository](#1-copy-template-from-repository)
     - [2. Install dependencies](#2-install-dependencies)
     - [3. Run scripts introduction (in *package.json*)](#3-run-scripts-introduction-in-packagejson)
     - [4. Configure run scripts in WebStorm](#4-configure-run-scripts-in-webstorm)
     - [5. Configure WebStorm JavaScript file template](#5-configure-webstorm-javascript-file-template)
+    - [6. Configure ESLint in WebStorm](#6-configure-eslint-in-webstorm)
 - [Development](#development)
     - [A. General](#a-general)
     - [B. Express](#b-express)
@@ -29,7 +30,7 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Installtion
-### 1. Install [Nodemon](https://github.com/remy/nodemon)
+### 1. Install [Nodemon](https://github.com/remy/nodemon) (File change monitoring and auto-restart/test.)
 ```
 npm install -g nodemon
 ```
@@ -44,7 +45,7 @@ C:\Users\username\AppData\Roaming\npm
 C:\>set PATH=%PATH%;C:\Users\username\AppData\Roaming\npm;
 ```
 
-### 2. Install [Istanbul](https://github.com/gotwarlost/istanbul)
+### 2. Install [Istanbul](https://github.com/gotwarlost/istanbul) (Coverage analysis)
 ```
 npm install -g istanbul
 ```
@@ -54,7 +55,7 @@ Start Mongod instance on local PC. Make sure that it is accessible from shell. Y
 ```
 > mongo
 ```
-### 4. Install [EsLint](http://eslint.org/)
+### 4. Install [EsLint](http://eslint.org/) (JS linting utility)
 ```
 npm install -g eslint
 ```
