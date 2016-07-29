@@ -146,7 +146,6 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
   - Name the base folder
 
 - Follow the folder structure. Keep ./test in sync with ./src.
-- Put external dependencies setup/initialization codes in ./src/assets. This folder is excluded for coverage report (defined in .istanbul.yml)
 
 
 ### B. Express
