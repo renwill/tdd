@@ -630,15 +630,17 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     });
 
   ```
+
+
 ### D. Web service API
   Ref: [10 Best Practices for Better RESTful API](http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
-- 1. Use nouns but no verbs
-  | Resource | GET  | POST | PUT | DELETE|
-  |          | read | create | update | delete|
-  |:----|:----|:----|:----|:----|
-  |/cars|Returns a list of cars|Create a new ticket|Bulk update of cars|Delete all cars
-  |/cars/711|Returns a specific car|Method not allowed (405)|Updates a specific ticket|Deletes a specific ticket
+ #### 1. Use nouns but no verbs
+| Resource  | GET (Read)             | POST (Create)            | PUT (Update)              | DELETE                    |
+|-----------|------------------------|--------------------------|---------------------------|---------------------------|
+| /cars     | Returns a list of cars | Create a new ticket      | Bulk update of cars       | Delete all cars           |
+| /cars/711 | Returns a specific car | Method not allowed (405) | Updates a specific ticket | Deletes a specific ticket |
+
 
   **Do not use verbs**
   ```js
@@ -647,10 +649,10 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     /deleteAllRedCars
   ```
 
-- 2. GET method and query parameters should not alter the state
+#### 2. GET method and query parameters should not alter the state
   Use PUT, POST and DELETE methods  instead of the GET method to alter the state.
 
-- 3. Use plural nouns
+#### 3. Use plural nouns
   ```js
     /cars instead of /car
     /users instead of /user
@@ -658,14 +660,14 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     /settings instead of /setting
 
   ```
-- 4. Use sub-resources for relations
+#### 4. Use sub-resources for relations
   If a resource is related to another resource use subresources.
   ```js
   GET /cars/711/drivers/ Returns a list of drivers for car 711
   GET /cars/711/drivers/4 Returns driver #4 for car 711
   ```
 
-- 5. Handle Errors with HTTP status codes
+#### 5. Handle Errors with HTTP status codes
     The HTTP standard provides over 70 status codes to describe the return values. We don’t need them all, but  there should be used at least a mount of 10.
 
     200 – OK – Eyerything is working
@@ -684,7 +686,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
   **Use error payloads**
 
-    All exceptions should be mapped in an error payload.
+  All exceptions should be mapped in an error payload.
 
 
 
