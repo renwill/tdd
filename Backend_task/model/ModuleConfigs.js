@@ -4,5 +4,6 @@ var moduleConfigSchema = new Schema({
         module: {type: String, required: true},
         values: Schema.Types.Mixed
 });
+moduleConfigSchema.set('autoIndex', false);
 module.exports = mongoose.model('ModuleConfigs', moduleConfigSchema, 'ModuleConfigs');
 

@@ -41,7 +41,6 @@ describe('main', function () {
             done();
         });
     });
-
     describe('main._process()', function () {
         it('should execute start() in process', function (done) {
             var _process = main.__get__('_process');
