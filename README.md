@@ -19,13 +19,26 @@
     - [B. Express](#b-express)
     - [C. Test case examples](#c-test-case-examples)
     - [D. Mongoose](#d-mongoose)
+      - [Index](#index)
     - [E. Recommended library](#e-recommended-library)
       - [Development](#development-1)
       - [Testing (refer to ./Examples)](#testing-refer-to-examples)
 - [Coding style:](#coding-style)
     - [A. Native JavaScript](#a-native-javascript)
+      - [Formatting](#formatting)
+      - [Logical operators](#logical-operators)
+      - [Functions](#functions)
+      - [Naming](#naming)
+      - [OO related](#oo-related)
     - [B. Node.JS](#b-nodejs)
+      - [Error handling](#error-handling)
     - [C. Testing specific](#c-testing-specific)
+    - [D. Web service API](#d-web-service-api)
+      - [1. Use nouns but no verbs](#1-use-nouns-but-no-verbs)
+      - [2. GET method and query parameters should not alter the state](#2-get-method-and-query-parameters-should-not-alter-the-state)
+      - [3. Use plural nouns](#3-use-plural-nouns)
+      - [4. Use sub-resources for relations](#4-use-sub-resources-for-relations)
+      - [5. Handle Errors with HTTP status codes](#5-handle-errors-with-http-status-codes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -34,7 +47,7 @@
 ```
 npm install -g nodemon
 ```
-In case you got below error: 
+In case you got below error:
 ```
 nodemon is not recognized as an internal or external command, program or batch file
 ```
@@ -152,7 +165,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 | Private function |./Examples/private  |
 
 ### D. [Mongoose](http://mongoosejs.com/docs/guide.html)
-- Index
+#### Index
 
 ![](./images/mongoose/index.png)
 ```js
@@ -210,7 +223,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 ----
 # Coding style:
 ### A. Native JavaScript
-- Formatting
+#### Formatting
   - Use **4 spaces** for indentation. Avoid **tabs**.
   - Use **single quotes '** for strings, unless you are writing JSON.
   - Declare one variable per var statement. All variables/functions should be declared before use.
@@ -280,7 +293,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
       ```
 
 
-- Logical operators
+#### Logical operators
   - Use === and !== over == and !=.
   - Use isNaN() for NaN testing.
   - Use multi-line ternary operator
@@ -309,7 +322,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     }
     ```
 
-- Functions
+#### Functions
   - Do not use wrapper objects for primitive types. Declare primitive types in literal form.
     ```js
     // Good
@@ -397,7 +410,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	}, 1000);
 	```
 
-- Naming
+#### Naming
 
   In general, use functionNamesLikeThis, _privateFunctionNamesLikeThis,
   variableNamesLikeThis, _privateVariableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenamesLikeThis.js.
@@ -455,7 +468,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 	```
 
 
-- OO related
+#### OO related
   - Constructors
 
 	Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you will overwrite the base!
@@ -519,7 +532,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     ```
 
 ### B. Node.JS
-  - Error handling
+#### Error handling
     - Always check for errors in callbacks
         ```js
         // Good
@@ -636,10 +649,11 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   Ref: [10 Best Practices for Better RESTful API](http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
  #### 1. Use nouns but no verbs
-| Resource  | GET (Read)             | POST (Create)            | PUT (Update)              | DELETE                    |
-|-----------|------------------------|--------------------------|---------------------------|---------------------------|
-| /cars     | Returns a list of cars | Create a new ticket      | Bulk update of cars       | Delete all cars           |
-| /cars/711 | Returns a specific car | Method not allowed (405) | Updates a specific ticket | Deletes a specific ticket |
+
+ Resource  | GET (Read)             | POST (Create)            | PUT (Update)              | DELETE
+----------|----------------------|------------------------|-------------------------|--------------------------
+ /cars     | Returns a list of cars | Create a new ticket      | Bulk update of cars       | Delete all cars
+ /cars/711 | Returns a specific car | Method not allowed (405) | Updates a specific ticket | Deletes a specific ticket
 
 
   **Do not use verbs**
