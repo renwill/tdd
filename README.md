@@ -630,6 +630,61 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     });
 
   ```
+### D. Web service API
+  Ref: [10 Best Practices for Better RESTful API](http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
+
+- 1. Use nouns but no verbs
+  | Resource | GET  | POST | PUT | DELETE|
+  |          | read | create | update | delete|
+  |:----|:----|:----|:----|:----|
+  |/cars|Returns a list of cars|Create a new ticket|Bulk update of cars|Delete all cars
+  |/cars/711|Returns a specific car|Method not allowed (405)|Updates a specific ticket|Deletes a specific ticket
+
+  **Do not use verbs**
+  ```js
+    /getAllCars
+    /createNewCar
+    /deleteAllRedCars
+  ```
+
+- 2. GET method and query parameters should not alter the state
+  Use PUT, POST and DELETE methods  instead of the GET method to alter the state.
+
+- 3. Use plural nouns
+  ```js
+    /cars instead of /car
+    /users instead of /user
+    /products instead of /product
+    /settings instead of /setting
+
+  ```
+- 4. Use sub-resources for relations
+  If a resource is related to another resource use subresources.
+  ```js
+  GET /cars/711/drivers/ Returns a list of drivers for car 711
+  GET /cars/711/drivers/4 Returns driver #4 for car 711
+  ```
+
+- 5. Handle Errors with HTTP status codes
+    The HTTP standard provides over 70 status codes to describe the return values. We don’t need them all, but  there should be used at least a mount of 10.
+
+    200 – OK – Eyerything is working
+    201 – OK – New resource has been created
+    204 – OK – The resource was successfully deleted
+
+    304 – Not Modified – The client can use cached data
+
+    400 – Bad Request – The request was invalid or cannot be served. The exact error should be explained in the error payload. E.g. „The JSON is not valid“
+    401 – Unauthorized – The request requires an user authentication
+    403 – Forbidden – The server understood the request, but is refusing it or the access is not allowed.
+    404 – Not found – There is no resource behind the URI.
+    422 – Unprocessable Entity – Should be used if the server cannot process the enitity, e.g. if an image cannot be formatted or mandatory fields are missing in the payload.
+
+    500 – Internal Server Error – API developers should avoid this error. If an error occurs in the global catch blog, the stracktrace should be logged and not returned as response.
+
+  **Use error payloads**
+
+    All exceptions should be mapped in an error payload.
 
 
 
@@ -642,3 +697,5 @@ Reference:
 3. [TDD/BDD - Properly defining tests, adjusting tests, putting describe blocks inside it blocks](http://programmers.stackexchange.com/questions/298362/tdd-bdd-properly-defining-tests-adjusting-tests-putting-describe-blocks-insi)
 
 4. [Testing Your JavaScript with Jasmine](http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229)
+
+5. [10 Best Practices for Better RESTful API](http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
