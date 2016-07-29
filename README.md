@@ -538,46 +538,46 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 #### Error handling
 
-    - Always check for errors in callbacks
+  - Always check for errors in callbacks
 
-        ```js
-        // Good
-        database.get('drabonballs', function(err, drabonballs) {
-            if (err) {
-                // handle the error somehow, maybe return with a callback
-                return console.log(err);
-            }
-            console.log(drabonballs);
-        });
-
-        // Bad
-        database.get('pokemons', function(err, pokemons) {
-            console.log(pokemons);
-        });
-        ```
-
-    - Return on callbacks
-
-      ```js
-      // Good
-      database.get('drabonballs', function(err, drabonballs) {
+    ```js
+    // Good
+    database.get('drabonballs', function(err, drabonballs) {
         if (err) {
-          // handle the error somehow, maybe return with a callback
-          return console.log(err);
+            // handle the error somehow, maybe return with a callback
+            return console.log(err);
         }
         console.log(drabonballs);
-      });
+    });
 
-      // Bad
-      database.get('drabonballs', function(err, drabonballs) {
+    // Bad
+    database.get('pokemons', function(err, pokemons) {
+        console.log(pokemons);
+    });
+    ```
+
+  - Return on callbacks
+
+    ```js
+    // Good
+    database.get('drabonballs', function(err, drabonballs) {
         if (err) {
-          // if not return here
-          console.log(err);
+            // handle the error somehow, maybe return with a callback
+            return console.log(err);
+        }
+        console.log(drabonballs);
+    });
+
+    // Bad
+    database.get('drabonballs', function(err, drabonballs) {
+        if (err) {
+            // if not return here
+            console.log(err);
         }
         // this line will be executed as well
         console.log(drabonballs);
-      });
-      ```
+    });
+    ```
 
 ### C. Testing specific
 - Test case documentation and grammar (2 approaches)
