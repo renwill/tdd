@@ -22,7 +22,7 @@ describe('Middleware', function() {
 
     });
 
-    describe('getTitle1', function (){
+    describe('getTitle', function (){
         it('should call sendJson to return message', function () {
             var sendJsonMock = sinon.spy();
             var next = sinon.stub();
