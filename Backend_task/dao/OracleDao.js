@@ -69,12 +69,3 @@ module.exports = {
     getSchedule : getSchedule,
     cleanUp     : cleanUp
 };
-
-if (process.env.NODE_ENV === 'test') {
-    module.exports._private = {
-        // private methods
-        _getOracleData : _getOracleData
-    }
-}
-
-

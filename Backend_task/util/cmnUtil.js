@@ -1,7 +1,7 @@
 'use strict';
 /**
  * --== Sample for format() ==========================================
- *      console.log("[{0}] Executed ".format(
+ *      console.logs("[{0}] Executed ".format(
  *          new Date().toISOString()
  *      ));
  * --=================================================================

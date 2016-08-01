@@ -1,19 +1,18 @@
 'use strict';
-var _                   = require('lodash');
-var nconf               = require('nconf');
-var mongoose            = require('mongoose');
-var cmnUtil             = require('../util/cmnUtil');
-var logger              = require('../util/Logger');
-var config 	            = require('../config/config');
-var ModuleConfigs       = require('../model/ModuleConfigs');
+var _               = require('lodash');
+var nconf           = require('nconf');
+var mongoose        = require('mongoose');
+var cmnUtil         = require('../util/cmnUtil');
+var logger          = require('../util/Logger');
+var ModuleConfigs   = require('../model/ModuleConfigs');
 
 var connection;
-var options  = { server: { socketOptions: { connectTimeoutMS : config.dbConnectTimeoutMS }}};
+var options  = { server: { socketOptions: { connectTimeoutMS : nconf.get('dbConnectTimeoutMS') }}};
 
 function initialize(start,end) {
     if (mongoose.connection.readyState !== 1) {
         logger.info('Mongo DB is not yet connected, trying to connect...');
-        connection = mongoose.connect(config.dbUrl, options, function mongooseConnect(err){
+        connection = mongoose.connect(nconf.get('dbUrl'), options, function mongooseConnect(err){
             if (err) {
                 logger.error('DB cannot be connected. Process failed to be started.');
                 return end();

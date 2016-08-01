@@ -1,9 +1,8 @@
-var oracledb = require('oracledb');
+var nconf 	= require('nconf');
+var moment 	= require('moment');
+var oracledb= require('oracledb');
 var Promise = require('bluebird');
-var moment = require('moment');
-
-var config = require('../config/config');
-var logger = require('../util/Logger');
+var logger 	= require('../util/Logger');
 
 const rowFetchFromResultSetEachTime = 10;
 
@@ -16,9 +15,9 @@ const _connection_creating = '_connection_creating';
 const retryGetConnectionTimeMilliseconds = 1000;
 
 var _poolAttributes = {
-    user          	: config.ODS_user,
-    password      	: config.ODS_password,
-    connectString 	: config.ODS_connectString,
+    user          	: nconf.get('ODS_user'),
+    password      	: nconf.get('ODS_password'),
+    connectString 	: nconf.get('ODS_connectString'),
     poolMax			: 10000
 };
 

@@ -1,16 +1,13 @@
 'use strict';
-var _                   = require('lodash');
-var async               = require('async');
-var nconf               = require('nconf');
-var cmnUtil             = require('../util/cmnUtil');
-var logger              = require('../util/Logger');
+var _               = require('lodash');
+var async           = require('async');
+var nconf           = require('nconf');
+var cmnUtil         = require('../util/cmnUtil');
+var logger          = require('../util/Logger');
+var MongoDao        = require('../dao/MongoDao');
+var OracleDao       = require('../dao/OracleDao');
+var ModuleConfigs   = require('../model/ModuleConfigs');
 
-var MongoDao            = require('../dao/MongoDao');
-var OracleDao           = require('../dao/OracleDao');
-var config              = require('../config/config');
-var ModuleConfigs       = require('../model/ModuleConfigs');
-
-var mExport = {};
 function cleanUp(callback){
     OracleDao.cleanUp(callback);
 }
@@ -21,13 +18,14 @@ function getConfig(p_module_name,callback){
             function ModuleConfig(err, obj) {
                 _massageConfig(err,obj,function manipulateModuleConfig(obj,cb){
                     logger.info('module config: ' + JSON.stringify(obj.values));
-                    nconf.set('mConfig', obj.values);
+                    //nconf.set('mConfig', obj.values);
+                    nconf.add('module', { type: 'literal', store: obj.values});
                     cb(null, 1);
                 },ap_callback);
             });
     },
     function(ap_callback){
-        nconf.set('nConfig',config);
+        // get region config, etc.....
         ap_callback();
     }],callback);
 }
@@ -45,7 +43,7 @@ function _massageConfig(err,obj,handling,callback){
 }
 
 // export the class
-mExport = {
+module.exports = {
     // system methods
     initialize          : MongoDao.initialize,
     disconnect          : MongoDao.disconnect,
@@ -57,15 +55,3 @@ mExport = {
     cleanUp             : cleanUp,
     getConfig           : getConfig
 };
-
-if (process.env.NODE_ENV === 'test') {
-    _.merge(mExport,{
-        _private : {
-            // private methods
-            _massageConfig      : _massageConfig
-        }
-    });
-}
-
-// export the class
-module.exports = mExport;

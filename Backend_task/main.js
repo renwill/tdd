@@ -1,23 +1,19 @@
 'use strict';
+var fs              = require('fs');
+var path            = require('path');
 var nconf           = require('nconf');
 var async           = require('async');
 var P1              = require('./process/p1');
 var P2              = require('./process/p2');
 var db              = require('./dao/DB');
-var config          = require('./config/config');
 var logger          = require('./util/Logger');
 var backendMonitor  = require('./util/BackendMonitor');
-var monitorOption = {
-    expectedExecutionTime: config.expectedExecutionTime,
-    nextBatchInterval: config.jobInterval,
-    nextRetryInterval: config.retryInterval
-};
-var PROCESS_LIST = [P1,P2];
-var MODULE_NAME = 'decisionMaker';
-
-backendMonitor.init(monitorOption);
-
-nconf.argv().env().file('dummy.json');
+var configDir       = path.join(__dirname, 'config');
+var PROCESS_LIST    = [P1,P2];
+var MODULE_NAME     = 'decisionMaker';
+var appConfigPath;
+var monitorOption;
+var defaultConfigPath;
 
 function _process(pObj,callback){
 
@@ -34,7 +30,52 @@ function _process(pObj,callback){
     });
 }
 
+function _initBackendMonitor(){
+    monitorOption = {
+        expectedExecutionTime   : nconf.get('expectedExecutionTime'),
+        nextBatchInterval       : nconf.get('jobInterval'),
+        nextRetryInterval       : nconf.get('retryInterval')
+    };
+    backendMonitor.init(monitorOption);
+}
+
 function _getAppConfigs(callback){
+
+    /* load application config */
+    try {
+        appConfigPath = path.join(configDir, 'config.json');
+        if (!fs.existsSync(appConfigPath)) {
+            console.log(new Date().toISOString(), 'Missing application config! Expected config file at path: ', appConfigPath);
+            //return callback(new Error('No application config is found.'));
+        } else {
+            nconf.use('app', {
+                type : 'file',
+                file : appConfigPath
+            });
+        }
+    } catch (e) {
+        console.log(new Date().toISOString(), 'Error in reading application config:', appConfigPath, e);
+        //return callback(new Error('Error in reading application config: {0} ({1})'.format(appConfigPath, e)));
+    }
+
+    /* load default config */
+    try {
+        defaultConfigPath = path.join(configDir, 'default-config.json');
+        if (!fs.existsSync(defaultConfigPath)) {
+            console.log(new Date().toISOString(), 'Missing default config! Expected config file at path: ', defaultConfigPath);
+        } else {
+            nconf.use('default', {
+                type : 'file',
+                file : defaultConfigPath
+            });
+        }
+    } catch (e) {
+        console.log(new Date().toISOString(), 'Error in reading default Config:', defaultConfigPath, e);
+    }
+    return callback();
+}
+
+function _getDBConfigs(callback){
     db.getConfig(MODULE_NAME,callback);
 }
 
@@ -48,7 +89,7 @@ function _app(callback){
     console.log('==== start ==== ');
     async.series(
         [
-            _getAppConfigs,
+            _getDBConfigs,
             _execProcesses
         ],
         function (err, msg){
@@ -67,32 +108,28 @@ function _start(callback){
 function _end(err) {
     backendMonitor.recordEndOfProcess();
     logger.info('================================== Batch completed ==================================');
+
     if (err){
-        setTimeout(batchProcess, config.retryInterval);
+        setTimeout(batchProcess, nconf.get('retryInterval'));
     }else{
-        setTimeout(batchProcess, config.jobInterval);
+        setTimeout(batchProcess, nconf.get('jobInterval'));
     }
-};
+}
 
 function batchProcess(){
-    logger.info('================================== Batch started ==================================' );
-    db.initialize(_start, _end);
+    _getAppConfigs(function(err){
+        if(err)
+            throw err;
+        _initBackendMonitor();
+        logger.init();
+        logger.info('================================== Batch started ==================================' );
+        db.initialize(_start, _end);
+    });
 };
 
 module.exports = {
     batchProcess: batchProcess
 };
-
-/* istanbul ignore else */
-if (process.env.NODE_ENV === 'test') {
-    module.exports._private = {
-        _app            : _app,
-        _end            : _end,
-        _start          : _start,
-        _process        : _process,
-        _getAppConfigs  : _getAppConfigs
-    }
-}
 
 
 

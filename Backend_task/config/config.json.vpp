@@ -1,0 +1,11 @@
+{
+	dbUrl: 			'mongodb://localhost:27017/ccsn',
+	logPath: 		'./logs/',
+	retryInterval:		5000,
+	jobInterval:       2000,
+	dbConnectTimeoutMS: 10000,
+	expectedExecutionTime: 2*60*1000,
+	ODS_user          : 'GLOBAL_SUPP',
+	ODS_password      : 'GLOBAL_SUPP',
+	ODS_connectString : '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=hkir2nppm.oocl.com)(PORT=1521))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=irnppm.oocl)))'
+}

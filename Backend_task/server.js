@@ -20,8 +20,8 @@ app.listen(8081);
 // If the Node process ends, close the Mongoose connection
 process.on('SIGINT', db.disconnect).on('SIGTERM', db.disconnect);
 process.on('uncaughtException', function processOnException(err) {
-    logger.error(err);
-    logger.info('-----exit app-------');
+    console.log(err);
+    console.log('-----exit app-------');
     process.exit(1);
 });
 

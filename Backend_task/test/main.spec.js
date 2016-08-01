@@ -1,26 +1,34 @@
 'use strict';
 
-var chai = require('chai');
-var sinon = require('sinon');
-var rewire = require('rewire');
-var sinonChai = require('sinon-chai');
+var chai        = require('chai');
+var nconf       = require('nconf');
+var sinon       = require('sinon');
+var rewire      = require('rewire');
+var sinonChai   = require('sinon-chai');
 chai.use(sinonChai);
-var expect = chai.expect;
-var main = rewire('../main');
+var expect      = chai.expect;
+var main        = rewire('../main');
+var logger      = require('../util/Logger');
 
 describe('main', function () {
+    before(function(done){
+        nconf.argv().env().file('dummy.json');
+        nconf.set('logPath','./logs/');
+        logger.init();
+        done();
+    });
     describe('main._app()', function () {
-        var revert_getAppConfigs;
+        var revert_getDBConfigs;
         var revert_execProcesses;
 
         it('should retrieve config and execute processes', function (done) {
             var _app = main.__get__('_app');
 
             var spy_execProcesses = sinon.spy();
-            var spy_getAppConfigs = sinon.spy();
+            var spy_getDBConfigs = sinon.spy();
 
-            revert_getAppConfigs = main.__set__('_getAppConfigs', function (callback) {
-                spy_getAppConfigs();
+            revert_getDBConfigs = main.__set__('_getDBConfigs', function (callback) {
+                spy_getDBConfigs();
                 callback();
             });
             revert_execProcesses = main.__set__('_execProcesses', function (callback) {
@@ -29,14 +37,14 @@ describe('main', function () {
             });
 
             _app(function () {
-                expect(spy_getAppConfigs).calledOnce;
+                expect(spy_getDBConfigs).calledOnce;
                 expect(spy_execProcesses).calledOnce;
                 done();
             });
         });
 
         after(function(done){
-            revert_getAppConfigs();
+            revert_getDBConfigs();
             revert_execProcesses();
             done();
         });

@@ -7,13 +7,8 @@ var logger  = require('../util/Logger');
 var NAME    = 'P1';
 
 function start(mainCallback) {
-    var mConfig= nconf.get('mConfig');
-    var nConfig= nconf.get('nConfig');
     var d = domain.create();
     var currentObj;
-    if (!mConfig || !nConfig){
-        return mainCallback(new Error('No config is found'));
-    }
 
     // process start.........
     logger.info('---- executing  --------');
@@ -60,10 +55,3 @@ module.exports = {
     NAME:   NAME,
     start:  start
 };
-
-if (process.env.NODE_ENV === 'test') {
-    module.exports._private = {
-        _eachItemProcess       : _eachItemProcess,
-        _skipProblematicRequest: _skipProblematicRequest
-    };
-}
