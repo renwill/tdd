@@ -191,6 +191,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     - http      : support for the raw HTTP protocol. While it can do everything, often it's a bit clumsy to use.
     - request   : uses the http module and adds a lot of sugar to make it easier to digest: A lot of common cases can be handled with just a tiny bit of code, it supports piping request data, forwarding requests to a different server, etc.
 - nodemailer: Send e-mails
+- nconf:    : configuration
 - fs        : file System
 - moment    : date time operation
 - bcrypt    : native JS bcrypt library for NodeJS
