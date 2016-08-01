@@ -22,8 +22,8 @@
       - [Index](#index)
     - [E. Recommended library](#e-recommended-library)
       - [Development](#development-1)
-      - [Testing (refer to ./Examples)](#testing-refer-to-examples)
-- [Coding style:](#coding-style)
+      - [Testing (refer to code examples in ./Examples)](#testing-refer-to-code-examples-in-examples)
+- [Coding style](#coding-style)
     - [A. Native JavaScript](#a-native-javascript)
       - [Formatting](#formatting)
       - [Logical operators](#logical-operators)
@@ -39,7 +39,7 @@
       - [3. Use plural nouns](#3-use-plural-nouns)
       - [4. Use sub-resources for relations](#4-use-sub-resources-for-relations)
       - [5. Handle Errors with HTTP status codes](#5-handle-errors-with-http-status-codes)
-- [Reference:](#reference)
+- [Reference](#reference)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -82,6 +82,7 @@ npm install -g eslint
 
 ### 2. Install dependencies
 In terminal, go to app root folder (where *package.json* is located), run `npm install`
+
 (Mocha is installed locally for easier setup for 'npm test'. If installed globally, the 'npm test' script will vary for every PC. Typically something like `nodemon --ext js --exec istanbul cover C:\\Users\\maoly\\AppData\\Roaming\\npm\\node_modules\\mocha\\bin\\_mocha`, where the path is relative to npm location and user Id.)
 
 
@@ -186,46 +187,46 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 ### E. Recommended library
 #### Development
-- winston       : Logger
+- [winston](https://github.com/winstonjs/winston)       : Logger
 - HTTP web service invocation
-    - http      : support for the raw HTTP protocol. While it can do everything, often it's a bit clumsy to use.
-    - request   : uses the http module and adds a lot of sugar to make it easier to digest: A lot of common cases can be handled with just a tiny bit of code, it supports piping request data, forwarding requests to a different server, etc.
-- nodemailer: Send e-mails
-- nconf:    : configuration
-- fs        : file System
-- moment    : date time operation
-- bcrypt    : native JS bcrypt library for NodeJS
-- async     : asynchronous operations
-- xml2js    : XML to JavaScript object
-- Lo-Dash   : superset of Underscore
+    - [http](https://nodejs.org/api/http.html)      : support for the raw HTTP protocol. While it can do everything, often it's a bit clumsy to use.
+    - [request](https://github.com/request/request)   : uses the http module and adds a lot of sugar to make it easier to digest: A lot of common cases can be handled with just a tiny bit of code, it supports piping request data, forwarding requests to a different server, etc.
+- [nodemailer](https://github.com/nodemailer/nodemailer): Send e-mails
+- [nconf](https://github.com/indexzero/nconf):    : configuration
+- [fs](https://nodejs.org/api/fs.html)        : file System
+- [moment](https://github.com/moment/moment)    : date time operation
+- [bcrypt](https://github.com/ncb000gt/node.bcrypt.js)    : native JS bcrypt library for NodeJS
+- [async](https://github.com/caolan/async)     : asynchronous operations
+- [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)    : XML to JavaScript object
+- [Lo-Dash](https://www.npmjs.com/package/lodash)   : superset of Underscore
     - compare to Underscore
         + speed advantage over Underscore on a variety of operations
         + more functions
         + more frequent commits
         - large file size   (22kb vs 5kb, but not matter for backend task)
 
-#### Testing (refer to ./Examples)
+#### Testing (refer to code examples in ./Examples)
 - Web Service:
   - http
-    - sinon
+    - [sinon](http://sinonjs.org/)
       - need to handle stream ourselves
       - https://codeutopia.net/blog/2015/01/30/how-to-unit-test-nodejs-http-requests/
-    - nock
+    - [nock](https://github.com/node-nock/nock)
       - easier to mock http request
       - define expected request and then verify
-  - request: sinon
+  - request: [sinon](http://sinonjs.org/)
 
 - Mongoose
-  - sinon
-  - sinon-mongoose
+  - [sinon](http://sinonjs.org/)
+  - [sinon-mongoose](https://github.com/underscopeio/sinon-mongoose)
     - plugin for sinon
     - easier to test with chaining mongoose calls
 
-- fs: mock-fs
-- timeout: sinon (use fake timers)
+- fs: [mock-fs](https://github.com/tschaub/mock-fs)
+- timeout: [sinon](http://sinonjs.org/) (use fake timers)
 
 ----
-# Coding style:
+# Coding style
 ### A. Native JavaScript
 #### Formatting
   - Use **4 spaces** for indentation. Avoid **tabs**.
@@ -715,7 +716,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 
 ----
-# Reference:
+# Reference
 
 1. [Node.js Style Guide](https://github.com/felixge/node-style-guide)
 
