@@ -88,8 +88,9 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
 
 ### 3. Run scripts introduction (in *package.json*)
-- `npm start`: Monitor file changes for automatic server restart
-- `npm test`: Monitor file changes for automatic testing all files, and generate coverage report (Do not lock the report files)
+- `npm start`: Run application (one-off)
+- `npm run auto`: Monitor file changes and restart automatic server
+- `npm test`: Monitor file changes for automatic testing all files, and generate coverage report to ./Coverage (Do not lock the report files)
     Coverage report will be generated to ./coverage/lcov-report/index.html. You may open it with any browser.
 
 ### 4. Configure run scripts in WebStorm
@@ -112,7 +113,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
     ![](./images/autotest/report.png)
 
-**Repeat the same steps for `npm start`.**
+**Repeat the same steps for `npm start`, `npm run auto`.**
 
 ### 5. Configure WebStorm JavaScript file template
 
@@ -153,7 +154,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
 - Follow the folder structure. Keep ./test in sync with ./src.
 
-- During testing, nodemon will automatically test codes (npm test) or restart application (npm start) once there is any code change. Or you could utilize WebStorm to run other configurations for you, e.g. mocha test one single file.
+- During testing, nodemon will automatically test codes (npm test) or restart application (npm auto) once there is any code change. Or you could utilize WebStorm to run other configurations for you, e.g. mocha test one single file.
 
 
 ### B. Express

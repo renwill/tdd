@@ -27,7 +27,8 @@
     "sinon-chai": "2.8.0"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server",
+    "auto": "nodemon server.js",
     "test": "nodemon --ext js --exec istanbul cover .\\node_modules\\mocha\\bin\\_mocha"
   }
 }
