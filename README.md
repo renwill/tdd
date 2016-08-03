@@ -596,11 +596,11 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   >   - When the number test cases within a describe block increases, try to extract the test cases into a new nested describe block
 
 
-- `describe('Class', ...)'`  > `describe('Class method', ...)`  > `it ('should...) ` test cases
+`describe('Class', ...)'`  > `describe('Class method', ...)`  > `it ('should...) ` test cases
     - Individual test case to test the method
     - Better for few test cases
 
-- `describe('Class', ...)'`  > `describe('Class method', ...)` > `describe('When scenario', ...)` > `it ('should...) ` test cases
+`describe('Class', ...)'`  > `describe('Class method', ...)` > `describe('When scenario', ...)` > `it ('should...) ` test cases
     - Group test cases together tested under same scenario
     - Better structure when the number of test case increases
 
