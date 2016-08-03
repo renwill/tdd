@@ -232,6 +232,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 # Coding style
 ### A. Native JavaScript
 #### Formatting
+  - [x] Use **'use strict;'**
   - [x] Use **4 spaces** for indentation. Avoid **tabs**.
   - [x] Use **single quotes '** for strings, unless you are writing JSON.
   - Declare one variable per var statement. All variables/functions should be declared before use.
