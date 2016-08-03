@@ -416,14 +416,15 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 #### Naming
 
   In general, use
-    - functionNamesLikeThis, _privateFunctionNamesLikeThis,
-    - methodNamesLikeThis,
-    - variableNamesLikeThis, _privateVariableNamesLikeThis
-    - ClassNamesLikeThis
-    - EnumNamesLikeThis
-    - CONSTANT_VALUES_LIKE_THIS
-    - foo.namespaceNamesLikeThis.bar
-    - filenamesLikeThis.js (code), filenameLikeThis.spec.js (testing)
+
+  - functionNamesLikeThis, _privateFunctionNamesLikeThis,
+  - methodNamesLikeThis,
+  - variableNamesLikeThis, _privateVariableNamesLikeThis
+  - ClassNamesLikeThis
+  - EnumNamesLikeThis
+  - CONSTANT_VALUES_LIKE_THIS
+  - fo.namespaceNamesLikeThis.bar
+  - filenamesLikeThis.js (code), filenameLikeThis.spec.js (testing)
 
   In detail:
   - **variables, properties and function**: **lowerCamelCase**. (exception below).
