@@ -293,12 +293,6 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     - Every **comma (,)** should be followed by a space or a **line break**.
     - Each **semicolon (;)** at the end of a statement should be followed with a **line break**.
     - Each **semicolon (;)** in the control part of a for statement should be followed with a **space**.
-    - No space between nameOfFunction and **left parenthesis (**. One space between **right parenthesis )** and the **left curly brace {**. Example:
-      ```js
-      function nameOfFunction(a, b) {
-        // nameOfFunction[no space here](
-        // a, b)[one space here]{
-      }
       ```
 
 
