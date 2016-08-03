@@ -33,6 +33,7 @@
     - [B. Node.JS](#b-nodejs)
       - [Error handling](#error-handling)
     - [C. Testing specific](#c-testing-specific)
+      - [Test case documentation and grammar (2 approaches)](#test-case-documentation-and-grammar-2-approaches)
     - [D. Web service API](#d-web-service-api)
       - [1. Use nouns but no verbs](#1-use-nouns-but-no-verbs)
       - [2. GET method and query parameters should not alter the state](#2-get-method-and-query-parameters-should-not-alter-the-state)
@@ -588,7 +589,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     ```
 
 ### C. Testing specific
-- Test case documentation and grammar (2 approaches)
+#### Test case documentation and grammar (2 approaches)
 
   > **Rule of thumb**
   >   - group related (functionality, situation wise) tests cases(it blocks) under the same describe block
