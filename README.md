@@ -595,10 +595,12 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
   >   - group related (functionality, situation wise) tests cases(it blocks) under the same describe block
   >   - When the number test cases within a describe block increases, try to extract the test cases into a new nested describe block
 
-  - `describe` Class > `describe` Class method > `it` test cases
+
+- `describe('Class', ...)'`  > `describe('Class method', ...)`  > `it ('should...) ` test cases
     - Individual test case to test the method
     - Better for few test cases
-  - **`describe` Class > `describe` class method > `describe` scenario > `it` test cases**
+
+- `describe('Class', ...)'`  > `describe('Class method', ...)` > `describe('When scenario', ...)` > `it ('should...) ` test cases
     - Group test cases together tested under same scenario
     - Better structure when the number of test case increases
 
@@ -632,7 +634,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         describe('Class.methodB', function(){
 
             //individual describe block for each scenario
-            describe('Scenario A/Stage A', function(){
+            describe('When Scenario A/Stage A', function(){
 
                 it('should xxx', function(){
 
@@ -643,7 +645,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
             });
 
-            describe('Scenario B/Stage B', function(){
+            describe('When Scenario B/Stage B', function(){
 
                 it('should xxx', function(){
 
