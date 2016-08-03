@@ -29,6 +29,6 @@
   "scripts": {
     "start": "node server",
     "auto": "nodemon server.js",
-    "test": "nodemon --ext js --exec istanbul cover .\\node_modules\\mocha\\bin\\_mocha"
+    "test": "nodemon --ext js --exec istanbul cover ./node_modules/mocha/bin/_mocha"
   }
 }
