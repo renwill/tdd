@@ -10,7 +10,7 @@ module.exports = {
         Example.create({
             test: 'test message',
             datetime_gmt: new Date()
-        }, function(err) {
+        }, function (err) {
             if (err) {
                 return next(err);
             }

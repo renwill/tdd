@@ -125,7 +125,7 @@ function batchProcess(){
         logger.info('================================== Batch started ==================================' );
         db.initialize(_start, _end);
     });
-};
+}
 
 module.exports = {
     batchProcess: batchProcess

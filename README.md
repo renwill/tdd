@@ -134,8 +134,10 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
     ![](./images/autotest/eslintCodeQuality.png)
 
 * Click Enable and set ESLint package location (C:\Users\{user_id}\AppData\Roaming\npm\node_modules\eslint)
+* Link the .eslintrc.json from repository root dir
 
     ![](./images/autotest/eslintEnable.png)
+
 
 
 ----
@@ -154,7 +156,7 @@ In terminal, go to app root folder (where *package.json* is located), run `npm i
 
 
 ### B. Express
-- Put route files in ./src/routes. They will be loaded by index.js.
+- Define WS API routes in ./src/routes. They will be loaded by index.js.
 - Put controller files in ./src/controllers. They will be loaded by routes.
 - Create one file per Mongoose model.
 
@@ -205,6 +207,7 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
         + more frequent commits
         - large file size   (22kb vs 5kb, but not matter for backend task)
 
+
 #### Testing (refer to code examples in ./Examples)
 - Web Service:
   - http
@@ -229,8 +232,8 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 # Coding style
 ### A. Native JavaScript
 #### Formatting
-  - Use **4 spaces** for indentation. Avoid **tabs**.
-  - Use **single quotes '** for strings, unless you are writing JSON.
+  - [x] Use **4 spaces** for indentation. Avoid **tabs**.
+  - [x] Use **single quotes '** for strings, unless you are writing JSON.
   - Declare one variable per var statement. All variables/functions should be declared before use.
 
     It isn't always possible to initialize variables at the point of declaration, so deferred initialization is fine.
@@ -257,9 +260,9 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
     }
     ```
 
-  - Limit to 80 characters per line
+  - [x] Limit to 80 characters per line
 
-  - Always use semicolons at the end of statement, assignment
+  - [x] Always use semicolons at the end of statement, assignment
 
     Gotha point: Semicolons should be included at the end of function **expressions**, but not at the end of function **declarations**. The distinction is best illustrated with an example:
       ```js
@@ -417,11 +420,18 @@ During actual production cutover, request [Mongo DB](https://docs.mongodb.com/ma
 
 #### Naming
 
-  In general, use functionNamesLikeThis, _privateFunctionNamesLikeThis,
-  variableNamesLikeThis, _privateVariableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis, CONSTANT_VALUES_LIKE_THIS, foo.namespaceNamesLikeThis.bar, and filenamesLikeThis.js.
+  In general, use
+    - functionNamesLikeThis, _privateFunctionNamesLikeThis,
+    - methodNamesLikeThis,
+    - variableNamesLikeThis, _privateVariableNamesLikeThis
+    - ClassNamesLikeThis
+    - EnumNamesLikeThis
+    - CONSTANT_VALUES_LIKE_THIS
+    - foo.namespaceNamesLikeThis.bar
+    - filenamesLikeThis.js (code), filenameLikeThis.spec.js (testing)
 
   In detail:
-  - **variables, properties and function**: **lowerCamelCase**. (exception below). 
+  - **variables, properties and function**: **lowerCamelCase**. (exception below).
     ```js
     // Good
     var adminUser = db.query('SELECT * FROM users ...');
