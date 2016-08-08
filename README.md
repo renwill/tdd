@@ -7,6 +7,7 @@
     - [2. Install Istanbul (Coverage analysis)](#2-install-istanbul-coverage-analysis)
     - [3. Install Mongo DB 3.2](#3-install-mongo-db-32)
     - [4. Install EsLint (JS linting utility)](#4-install-eslint-js-linting-utility)
+    - [5. Install Oracle driver for Node](#5-install-oracle-driver-for-node)
 - [Start the application from template](#start-the-application-from-template)
     - [1. Copy template from repository](#1-copy-template-from-repository)
     - [2. Install dependencies](#2-install-dependencies)
@@ -74,6 +75,18 @@ Start Mongod instance on local PC. Make sure that it is accessible from shell. Y
 ```
 npm install -g eslint
 ```
+### 5. Install Oracle driver for Node
+Doc:
+
+https://community.oracle.com/docs/DOC-931127
+
+Or
+
+https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instwin
+
+**Note**
+- Add C:\Oracle\instantclient; to the **first** element in the PATH variable
+
 ----
 
 # Start the application from template
