@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Installtion](#installtion)
+- [Installation](#installation)
     - [1. Install Nodemon (File change monitoring and auto-restart/test.)](#1-install-nodemon-file-change-monitoring-and-auto-restarttest)
     - [2. Install Istanbul (Coverage analysis)](#2-install-istanbul-coverage-analysis)
     - [3. Install Mongo DB 3.2](#3-install-mongo-db-32)
@@ -45,7 +45,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Installtion
+# Installation
 ### 1. Install [Nodemon](https://github.com/remy/nodemon) (File change monitoring and auto-restart/test.)
 ```
 npm install -g nodemon
@@ -93,9 +93,10 @@ https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instwin
 ### 1. Copy template from repository
 * Backend schedule task: Backend_task
 * Node.Js with Express for web services: Backend_ws
+* Change the name of the application in package.json (See: https://docs.npmjs.com/files/package.json)
 
 ### 2. Install dependencies
-In terminal, go to app root folder (where *package.json* is located), run `npm install`
+In the terminal, go to app root folder (where *package.json* is located), run `npm install`
 
 (Mocha is installed locally for easier setup for 'npm test'. If installed globally, the 'npm test' script will vary for every PC. Typically something like `nodemon --ext js --exec istanbul cover C:\\Users\\maoly\\AppData\\Roaming\\npm\\node_modules\\mocha\\bin\\_mocha`, where the path is relative to npm location and user Id.)
 
