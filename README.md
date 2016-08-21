@@ -75,6 +75,7 @@ Start Mongod instance on local PC. Make sure that it is accessible from shell. Y
 ```
 npm install -g eslint
 npm install -g eslint-plugin-mocha
+(See https://www.npmjs.com/package/eslint-plugin-mocha)
 ```
 ### 5. Install Oracle driver for Node
 Doc:
